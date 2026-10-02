@@ -1,16 +1,16 @@
-## Hi there 👋
+# wendust
 
-<!--
-**wendust/wendust** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+手机上的应用开发工具：HTML/CSS/JS 网页应用一键打包 APK，支持 Android 原生 Java 项目。全程手机完成，无需电脑。
 
-Here are some ideas to get you started:
+官网：https://wendust.surge.sh
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 下载
+
+安卓 APK：[Releases 最新版](https://github.com/wendust/wendust/releases/latest)
+
+## 特性
+
+- 网页三件套编辑（语法高亮 + 手机/电脑预览）
+- 一键打包 APK（自定义包名/版本号/图标）
+- Android 原生 Java 项目（编辑 + 图形化预览）
+- 三端互通（手机 App / 电脑版 / 在线版）
