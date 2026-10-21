@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>弹跳球物理 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();onresize=R;
+const hues=[212,150,40,0,270];
+let balls=Array.from({length:7},(_,i)=>({x:Math.random()*W,y:Math.random()*H*.5,vx:(Math.random()-.5)*8,vy:0,r:18+Math.random()*22,h:hues[i%5]}));
+onpointerdown=e=>{balls.forEach(b=>{const dx=e.clientX-b.x,dy=e.clientY-b.y,d=Math.hypot(dx,dy)+1;if(d<220){b.vx+=dx/d*11;b.vy+=dy/d*11}})};
+function loop(){x.fillStyle='#0D1524';x.fillRect(0,0,W,H);
+balls.forEach(b=>{b.vy+=.32;b.x+=b.vx;b.y+=b.vy;
+if(b.x<b.r||b.x>W-b.r){b.vx*=-.86;b.x=Math.max(b.r,Math.min(W-b.r,b.x))}
+if(b.y>H-b.r){b.vy*=-.82;b.y=H-b.r;if(Math.abs(b.vy)<1.2)b.vy=-Math.random()*9-3}
+x.fillStyle=`hsl(${b.h},70%,60%)`;x.beginPath();x.arc(b.x,b.y,b.r,0,7);x.fill()});
+document.getElementById('tip').textContent='点按屏幕把球炸开';
+requestAnimationFrame(loop)}loop();
+</script></body></html>

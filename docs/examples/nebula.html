@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>粒子星云 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();onresize=R;
+const P=[];for(let i=0;i<220;i++)P.push({x:W/2,y:H/2,vx:(Math.random()-.5)*3,vy:(Math.random()-.5)*3,hue:200+Math.random()*120,l:1});
+onpointerdown=e=>{P.forEach(p=>{const dx=e.clientX-p.x,dy=e.clientY-p.y,d=Math.hypot(dx,dy)+1;p.vx+=dx/d*6;p.vy+=dy/d*6})};
+function loop(){x.fillStyle='rgba(13,21,36,.12)';x.fillRect(0,0,W,H);
+P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy*=.985;
+if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+x.fillStyle=`hsla(${p.hue},80%,65%,.85)`;x.beginPath();x.arc(p.x,p.y,2.2,0,7);x.fill()});
+P.forEach((p,i)=>P.slice(i+1).forEach(q=>{const d=Math.hypot(p.x-q.x,p.y-q.y);
+if(d<70){x.strokeStyle=`hsla(${p.hue},80%,70%,${(1-d/70)*.25})`;x.lineWidth=.6;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}));
+document.getElementById('tip').textContent='点按产生引力';
+requestAnimationFrame(loop)}loop();
+</script></body></html>

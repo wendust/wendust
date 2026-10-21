@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>像素小鸟 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();
+let y=H*.4,v=0,pipes=[],score=0,alive=true,t=0;
+onpointerdown=()=>{if(alive)v=-7.4};
+function spawn(){pipes.push({x:W+40,gap:H*.28+Math.random()*H*.25,passed:false})}
+setInterval(()=>{if(alive)spawn()},1600);
+function loop(){t++;x.fillStyle='#1B2A4A';x.fillRect(0,0,W,H);
+if(alive){v+=.42;y+=v;
+if(y>H-30||y<0)alive=false}
+pipes.forEach(p=>{if(alive)p.x-=3.4;
+x.fillStyle='#2FA35C';x.fillRect(p.x,0,52,p.gap-90);x.fillRect(p.x,p.gap+90,52,H);
+if(!p.passed&&p.x+52<W*.32){p.passed=true;score++}
+if(alive&&W*.32+14>p.x&&W*.32-14<p.x+52&&(y-14<p.gap-90||y+14>p.gap+90))alive=false});
+pipes=pipes.filter(p=>p.x>-60);
+x.fillStyle='#F0B429';x.beginPath();x.arc(W*.32,y,14,0,7);x.fill();
+x.fillStyle='#0D1524';x.beginPath();x.arc(W*.32+5,y-4,2.4,0,7);x.fill();
+x.fillStyle='#D34C4C';x.beginPath();x.moveTo(W*.32+12,y);x.lineTo(W*.32+20,y+3);x.lineTo(W*.32+12,y+6);x.fill();
+document.getElementById('tip').textContent=alive?`得分 ${score} · 点按跳跃`:`得分 ${score} · 刷新重来`;
+requestAnimationFrame(loop)}loop();
+</script></body></html>

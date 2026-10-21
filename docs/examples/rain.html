@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>数字雨 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();onresize=R;
+const F='01wendustアイウエオカキクケコ01'.split('');
+const SZ=16,cols=W/SZ|0,drops=Array(cols).fill(0);
+x.fillStyle='#0D1524';x.fillRect(0,0,W,H);
+function loop(){x.fillStyle='rgba(13,21,36,.09)';x.fillRect(0,0,W,H);
+for(let i=0;i<cols;i++){const ch=F[Math.random()*F.length|0];
+x.fillStyle=Math.random()<.06?'#E8ECF4':`hsl(${150+Math.random()*30},80%,${45+Math.random()*25}%)`;
+x.font=SZ+'px monospace';x.fillText(ch,i*SZ,drops[i]*SZ);
+if(drops[i]*SZ>H&&Math.random()>.975)drops[i]=0;drops[i]++}
+requestAnimationFrame(loop)}loop();
+</script></body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>3D 线框地球 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();
+let rx=-18,ry=0,drag=false,lx=0,ly=0;
+onpointerdown=e=>{drag=true;lx=e.clientX;ly=e.clientY};onpointerup=()=>drag=false;
+onpointermove=e=>{if(!drag)return;ry+=(e.clientX-lx)*.6;rx-=(e.clientY-ly)*.6;lx=e.clientX;ly=e.clientY};
+const pts=[];
+for(let lat=-80;lat<=80;lat+=10)for(let lon=0;lon<360;lon+=10)
+pts.push({la:lat*Math.PI/180,lo:lon*Math.PI/180});
+function proj(p){const cA=Math.cos(ry*Math.PI/180),sA=Math.sin(ry*Math.PI/180);
+let X=Math.cos(p.la)*Math.cos(p.lo),Y=Math.sin(p.la),Z=Math.cos(p.la)*Math.sin(p.lo);
+let X2=X*cA-Z*sA,Z2=X*sA+Z*cA;
+const R2=Math.min(W,H)*.34,cx=W/2,cy=H/2;
+return[cx+X2*R2,cy+Y*R2,cx+Z2*R2,cy+Y*R2,Z2]}
+function loop(){x.fillStyle='#0D1524';x.fillRect(0,0,W,H);
+if(!drag)ry+=.28;
+const d=proj({la:0,lo:0});
+pts.forEach(p=>{const[px,py,px2,py2,z]=proj(p);
+const front=Math.sin(p.la)*Math.sin(p.lo)*Math.sin(ry*Math.PI/180)+Math.cos(p.la)*Math.cos(p.lo)*Math.cos(ry*Math.PI/180)>=-.15;
+x.fillStyle=front?'#8FB3E8':'#24324E';x.beginPath();x.arc(px,py,front?2.2:1.2,0,7);x.fill()});
+x.strokeStyle='rgba(143,179,232,.25)';x.lineWidth=1;
+for(let lat=-60;lat<=60;lat+=30){x.beginPath();
+for(let lon=0;lon<=360;lon+=6){const[px,py]=proj({la:lat*Math.PI/180,lo:lon*Math.PI/180});lon===0?x.moveTo(px,py):x.lineTo(px,py)}x.stroke()}
+document.getElementById('tip').textContent='拖动旋转地球';
+requestAnimationFrame(loop)}loop();
+</script></body></html>

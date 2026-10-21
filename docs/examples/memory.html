@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>记忆翻牌 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const syms=['★','◆','●','▲','■','♦','♣','♠'];
+const deck=[...syms,...syms].sort(()=>Math.random()-.5);
+let open=[],done=new Set(),moves=0;
+document.body.innerHTML+=`<div id=g style="position:fixed;inset:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:70px 16px 16px;box-sizing:border-box"></div>`;
+const g=document.getElementById('g');
+deck.forEach((s,i)=>{const b=document.createElement('button');
+b.style.cssText='background:#24324E;border:none;border-radius:14px;font-size:34px;color:transparent;transition:.25s;min-height:70px';
+b.onclick=()=>{if(open.length>=2||open.includes(i)||done.has(i))return;
+b.style.color='#E8ECF4';b.style.transform='scale(1.08)';open.push(i);
+if(open.length===2){moves++;
+const[a,b2]=open;
+if(deck[a]===deck[b2]){done.add(a);done.add(b2);open=[];if(done.size===16)setTimeout(()=>document.getElementById('tip').textContent=`全部配对！共 ${moves} 步`,50)}
+else setTimeout(()=>{[a,b2].forEach(k=>{g.children[k].style.color='transparent';g.children[k].style.transform=''});open=[]},600)}}
+g.appendChild(b)});
+document.getElementById('tip').textContent='翻开卡片配对';
+</script></body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>3D 公路跑酷 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();
+let pos=0,speed=0,steer=0,side=0,cars=[],score=0,alive=true,high=0;
+onpointerdown=e=>{speed=Math.min(speed+2,14)};onpointerup=()=>{};
+ondeviceorientation=e=>steer=(e.gamma||0)/45;
+onkeydown=e=>{if(e.key==='ArrowLeft')side-=.6;if(e.key==='ArrowRight')side+=.6};
+onpointermove=e=>{if(e.buttons)side=(e.clientX/W-.5)*2.4};
+for(let i=0;i<6;i++)cars.push({z:2+i*3,x:(Math.random()*1.6-.8)});
+function loop(){if(!alive)return;speed=Math.max(speed*.995,3);pos+=speed*.06;side*=.92;
+if(side<-1.2||side>1.2){alive=false}
+x.fillStyle='#0D1524';x.fillRect(0,0,W,H);
+const horizon=H*.38,vp=horizon+10;
+x.fillStyle='#1B2A4A';x.fillRect(0,horizon,W,2);
+for(let i=1;i<14;i++){const z=pos%1+i,s=1/z,sy=vp+(H-vp)*(1-1/z)*2.2;
+if(sy<0||sy>H)continue;
+const lw=W*.14*2/ z*2.6;
+x.strokeStyle=(i+Math.floor(pos))%2?'#8FB3E8':'#3B5F9E';x.lineWidth=Math.max(1,4/ z*2);
+x.beginPath();x.moveTo(W/2- W*.5/z + side*40/z,sy);x.lineTo(W/2+ W*.5/z + side*40/z,sy);x.stroke()}
+cars.forEach(car=>{car.z-=speed*.016;if(car.z<.4){car.z=8+Math.random()*4;car.x=Math.random()*1.6-.8}
+const z=car.z,s=(H-vp)*(1-1/z)*2.2,sy=vp+s,cw=W*.09/z*2.2,ch=cw*.7;
+const cx=W/2+car.x*W*.3/z*2+side*40/z;
+if(Math.abs(car.x-side)<.35&&z<1.1){alive=false}
+x.fillStyle='#D34C4C';x.fillRect(cx-cw/2,sy-ch,cw,ch)});
+x.fillStyle='#F0B429';x.fillRect(W/2-30+side*30,H-90,60,26);
+score+=speed*.02;
+document.getElementById('tip').textContent=`速度 ${Math.round(speed*10)} · 里程 ${score|0}m · 移动鼠标/左右键躲避`;
+requestAnimationFrame(loop)}loop();
+</script></body></html>

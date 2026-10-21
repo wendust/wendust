@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>2048 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+const N=4,S=80;let W,H;function R(){const s=Math.min(innerWidth-16,innerHeight-90)/N;W=c.width=s*N;H=c.height=s*N;S_()}R();
+let S;function S_(){S=W/N}
+let g=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],score=0;
+function add(){const e=[];g.forEach((r,i)=>r.forEach((v,j)=>{if(!v)e.push([i,j])}));if(!e.length)return;const[i,j]=e[Math.random()*e.length|0];g[i][j]=Math.random()<.9?2:4}
+add();add();
+const colors={2:'#3B5F9E',4:'#2FA35C',8:'#F0B429',16:'#E07B39',32:'#D34C4C',64:'#C2410C',128:'#7C3AED',256:'#6D28D9',512:'#5B21B6',1024:'#4C1D95',2048:'#3730A3'};
+function slide(dir){let moved=false;
+const rg=dir==='l'||dir==='u'? [0,1,2,3]:[3,2,1,0];
+const get=(i,j)=>dir==='l'||dir==='r'?g[i][j]:g[j][i],set=(i,j,v)=>{dir==='l'||dir==='r'?g[i][j]=v:g[j][i]=v};
+for(let i=0;i<4;i++){let row=[];for(const j of rg)if(get(i,j))row.push(get(i,j));
+for(let k=0;k<row.length-1;k++)if(row[k]===row[k+1]){row[k]*=2;score+=row[k];row.splice(k+1,1)}
+for(const j of rg)set(i,j,0);
+row.forEach((v,k)=>set(i,rg[k],v));
+for(let j=0;j<4;j++)if(g[j]!==undefined){}
+}
+for(let i=0;i<4;i++){let col=[];for(let j=0;j<4;j++)col.push(get(i,j));if(col.join()!==row.join())moved=true}
+if(moved)add();return moved}
+onpointerdown=e=>{sx=e.clientX;sy=e.clientY};onpointerup=e=>{const dx=e.clientX-sx,dy=e.clientY-sy;
+if(Math.abs(dx)<20&&Math.abs(dy)<20)return;
+if(Math.abs(dx)>Math.abs(dy))slide(dx>0?'r':'l');else slide(dy>0?'d':'u')};
+onkeydown=e=>{const m={ArrowLeft:'l',ArrowRight:'r',ArrowUp:'u',ArrowDown:'d'};if(m[e.key])slide(m[e.key])};
+function loop(){x.fillStyle='#1B2A4A';x.fillRect(0,0,W,H);
+g.forEach((r,i)=>r.forEach((v,j)=>{x.fillStyle=v?colors[v]||'#312E81':'#24324E';
+x.fillRect(j*S+4,i*S+4,S-8,S-8);
+if(v){x.fillStyle='#fff';x.font=`bold ${S*.36}px system-ui`;x.textAlign='center';x.textBaseline='middle';x.fillText(v,j*S+S/2,i*S+S/2)}}));
+document.getElementById('tip').textContent=`得分 ${score} · 滑动合并`;
+requestAnimationFrame(loop)}loop();
+</script></body></html>

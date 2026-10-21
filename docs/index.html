@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wendust — 没有电脑，也能在手机上写代码、做出 APP</title>
+<meta name="description" content="wendust 是一个安卓端的应用开发工具：HTML/CSS/JS 网页应用一键打包 APK，v5.5 起还能开发 Android 原生 Java 项目。全部在手机上完成。">
+<meta name="keywords" content="手机编程,手机写代码,没有电脑学编程,手机打包apk,手机上开发安卓应用,手机编程软件,安卓开发工具,APK打包,网页应用,Java开发,免费编程工具,wendust">
+<meta property="og:title" content="wendust — 在手机上开发应用">
+<meta property="og:description" content="写代码、预览、打包 APK，全部在手机上完成。支持网页应用和 Android 原生 Java 项目。免费。">
+<meta property="og:url" content="https://wendust.surge.sh">
+<meta property="og:type" content="website">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:#ece3d4;line-height:1.85;
+  background:#0f0c09;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -12%, rgba(224,170,99,.16), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 85% 30%, rgba(160,102,47,.10), transparent 65%),
+    radial-gradient(ellipse 80% 45% at 10% 68%, rgba(224,170,99,.07), transparent 60%),
+    radial-gradient(ellipse 90% 50% at 50% 108%, rgba(120,80,40,.12), transparent 62%);
+  background-attachment:fixed;
+}
+.container{max-width:720px;margin:0 auto;padding:0 22px}
+a{color:#f0c987}
+
+/* ===== 风沙噪点覆盖层 ===== */
+.grain{
+  position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* ===== header ===== */
+header{border-bottom:1px solid rgba(224,170,99,.18);padding:18px 0;background:rgba(15,12,9,.75);backdrop-filter:blur(10px);position:sticky;top:0;z-index:900}
+.logo-row{display:flex;align-items:center;gap:10px}
+.logo-row .name{font-size:19px;font-weight:700;letter-spacing:2px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#f0c987}
+.logo-row .site{margin-left:auto;font-size:13px;color:#7a6a52}
+
+/* ===== hamburger ===== */
+.logo-row{position:relative}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;margin-left:14px;background:none;border:0;cursor:pointer;padding:8px}
+.hamburger span{display:block;height:2px;width:100%;background:#f0c987;border-radius:1px}
+.drawer{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:#1a140e;box-shadow:-4px 0 30px rgba(0,0,0,.5);z-index:1001;transition:right .25s ease;padding:76px 0 0;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawer a{padding:16px 28px;font-size:15px;color:#ece3d4;text-decoration:none;border-bottom:1px solid rgba(224,170,99,.12)}
+.drawer a:active{background:rgba(224,170,99,.08)}
+.drawer-mask{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:none}
+.drawer-mask.open{display:block}
+
+/* ===== hero ===== */
+.hero{
+  padding:84px 0 64px;text-align:center;position:relative;overflow:hidden;
+  background-image:
+    linear-gradient(rgba(224,170,99,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224,170,99,.05) 1px, transparent 1px);
+  background-size:56px 56px;
+  border-bottom:1px solid rgba(224,170,99,.15);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 50% 42%, transparent 30%, rgba(15,12,9,.88) 100%);
+}
+.hero .container{position:relative;z-index:2}
+.hero .mark{margin-bottom:24px;filter:drop-shadow(0 0 18px rgba(224,170,99,.35))}
+.hero .ver-chip{
+  display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:12px;letter-spacing:2px;
+  color:#f0c987;border:1px solid rgba(224,170,99,.4);border-radius:999px;padding:3px 14px;margin-bottom:20px;
+  background:rgba(224,170,99,.07);
+}
+.hero h1{
+  font-size:36px;letter-spacing:4px;margin-bottom:12px;font-weight:800;
+  background:linear-gradient(120deg,#f5e3c4,#e0aa63 55%,#b97f3e);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 42px rgba(224,170,99,.22);
+}
+.hero .tagline{font-size:16px;color:#b3a186;margin-bottom:36px;letter-spacing:1px}
+.hero .tagline .mono{font-family:ui-monospace,Consolas,monospace;color:#f0c987}
+.hero .dl{
+  display:inline-block;color:#120d08;text-decoration:none;
+  padding:12px 38px;border-radius:8px;font-size:15px;font-weight:700;
+  background:linear-gradient(120deg,#f0c987,#d9a05b);
+  box-shadow:0 0 26px rgba(224,170,99,.28), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:box-shadow .2s ease;
+}
+.hero .dl:hover{box-shadow:0 0 40px rgba(224,170,99,.5), inset 0 1px 0 rgba(255,255,255,.35)}
+.hero .dl-note{margin-top:12px;font-size:12px;color:#7a6a52;letter-spacing:1px}
+.hero .dl-note a{color:#e0aa63}
+
+/* ===== sections ===== */
+section{padding:44px 0;border-top:1px solid rgba(224,170,99,.12)}
+section:first-of-type{border-top:0}
+h2{
+  font-size:20px;margin-bottom:18px;letter-spacing:1px;color:#f0c987;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+h2::before{content:"// ";color:#7a5c33}
+h3{font-size:15px;margin:22px 0 4px;color:#e8cf9e}
+p{color:#c2b39a;margin-bottom:12px}
+ol,ul{padding-left:22px;color:#c2b39a;margin-bottom:12px}
+li{margin-bottom:8px}
+li::marker{color:#a1662f}
+b{color:#ece3d4}
+code{
+  background:rgba(224,170,99,.08);border:1px solid rgba(224,170,99,.18);color:#f0c987;border-radius:4px;
+  padding:1px 6px;font-size:.88em;
+  font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;
+}
+
+/* ===== download cards ===== */
+.version{
+  border:1px solid rgba(224,170,99,.25);border-radius:12px;padding:24px 26px;margin-bottom:18px;
+  background:linear-gradient(160deg, rgba(224,170,99,.06), rgba(26,20,14,.6));
+  box-shadow:0 0 34px rgba(224,170,99,.07);
+}
+.version .vhead{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.version .vnum{font-size:18px;font-weight:700;font-family:ui-monospace,Consolas,monospace;color:#f0c987;letter-spacing:1px}
+.version .badge{font-size:12px;background:rgba(224,170,99,.14);color:#f0c987;border:1px solid rgba(224,170,99,.35);border-radius:4px;padding:2px 8px}
+.version ul{margin:10px 0 16px}
+.version .dl{
+  display:inline-block;color:#120d08;text-decoration:none;font-weight:700;
+  padding:9px 24px;border-radius:7px;font-size:14px;
+  background:linear-gradient(120deg,#f0c987,#d9a05b);
+  box-shadow:0 0 18px rgba(224,170,99,.22);
+}
+.version .vsize{font-size:12px;color:#7a6a52;margin-left:10px}
+
+/* ===== footer ===== */
+footer{border-top:1px solid rgba(224,170,99,.15);padding:36px 0;text-align:center;color:#7a6a52;font-size:13px;letter-spacing:1px}
+
+@media (max-width:480px){
+  .hero h1{font-size:27px;letter-spacing:2px}
+  .hero{padding:60px 0 48px}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <div class="container logo-row">
+    <svg width="30" height="30" viewBox="0 0 44 44" aria-hidden="true">
+      <rect width="44" height="44" rx="10" fill="none" stroke="#e0aa63" stroke-width="2.4"/>
+      <path d="M10 14 L16 32 L22 19 L28 32 L34 14" fill="none" stroke="#f0c987" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <img src="assets/wendust-icon.png" alt="wendust" style="width:30px;height:30px;border-radius:8px;vertical-align:middle">
+    <span class="name">wendust</span>
+    <span class="site">www.wendust.com</span>
+    <button class="hamburger" id="hamburger" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="drawer" id="drawer">
+  <a href="index.html#offline-notice" onclick="document.getElementById('offline-notice').scrollIntoView();return false;">在线版已下线</a>
+  <a href="pc.html">电脑版</a>
+  <a href="docs.html">官方文档</a>
+  <a href="#download">下载 App</a>
+</nav>
+<div class="drawer-mask" id="drawer-mask"></div>
+
+
+<div class="hero">
+  <div class="container">
+    <div class="mark">
+      <svg width="88" height="88" viewBox="0 0 44 44" aria-hidden="true">
+        <rect width="44" height="44" rx="10" fill="none" stroke="#e0aa63" stroke-width="2.2"/>
+        <path d="M10 14 L16 32 L22 19 L28 32 L34 14" fill="none" stroke="#f0c987" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div id="offline-notice" style="max-width:880px;margin:16px auto 0;background:#fff;border:2px solid #C62828;border-radius:14px;overflow:hidden;font-family:inherit;">
+  <div style="background:#C62828;color:#fff;padding:10px 18px;font-weight:700;font-size:15px;letter-spacing:1px;">wendust 网页版停止运营公告</div>
+  <div style="padding:18px 20px;color:#3A3A3A;font-size:14px;line-height:2;">
+    <p style="margin:0 0 10px;">致亲爱的用户：</p>
+    <p style="margin:0 0 10px;">自 wendust 网页版上线以来，我们与每一位在浏览器里写下第一行代码的创作者一起，走过了很长的一段路。从打开网页、新建项目的第一秒，到写下第一个标题、第一段样式、第一行脚本；从一次小心翼翼的预览，到第一次成功把作品打包成 APK——网页版陪着很多朋友完成了从"我想做个应用"到"我的应用已经跑起来了"这最重要的一步。你们在课堂上传阅的作品、在深夜里改到完善的页面、分享给朋友的第一个小游戏，都是这段路上最珍贵的风景，也是 wendust 一直往前走的全部理由。</p>
+    <p style="margin:0 0 10px;">回望这段时间，网页版承担了它独特的使命：让没有任何安装条件的设备也能立刻体验创作的完整流程，让"试一试"的门槛降到几乎为零。无数第一次接触编程的用户，正是从浏览器里的那个编辑器开始，认识了我们引以为傲的打包能力、云端账号与免费云端空间。可以说，没有网页版的桥梁，就没有今天 wendust 手机端的千万次安装与使用。它完成了一次几乎不可能完成的任务，而且完成得很好。</p>
+    <p style="margin:0 0 10px;">但是，由于团队精力有限，网页版与手机端双线维护的成本越来越高：同样的一个功能，要在两套完全不同的运行环境里各做一遍、各修一遍、各测一遍；同样的一个问题，要排查两份完全不同的日志。资源被分散之后，两个版本都难以做到极致。为了对每一个认真使用 wendust 的用户负责，为了把全部的时间、算力与心力都投入到手机端体验的打磨与更新上，经过反复权衡与慎重评估，我们不得不做出如下决定：</p>
+    <p style="margin:0 0 10px;font-weight:700;color:#C62828;">在此，非常遗憾地宣布：wendust 网页版即将停止运营。</p>
+    <p style="margin:0 0 10px;">需要特别说明的是：本次下线<b>不影响 wendust 手机 App 的任何功能</b>——您的本地项目、本地数据、免费云端空间、云端账号、已打包的全部 APK，都将继续正常使用，与过去完全一致。手机端不仅不会停，反而会以更快的节奏更新：今天刚刚上线的课后答题与错题本、积木舞台、离线原生编译，都是这份承诺的证明。</p>
+    <p style="margin:0 0 10px;">具体时间安排如下：</p>
+    <p style="margin:0 0 4px;">1、即日起，网页版不再新增任何功能，仅保留现有能力供大家过渡使用，期间出现的问题将不再逐一修复，请您谅解；</p>
+    <p style="margin:0 0 4px;">2、预计 <b>2026 年 11 月 18 日 10:00</b> 正式关闭网页版在线服务，届时网页版将无法访问，在线编辑、预览与打包能力将一并停止；<b>即日起在线版入口已停止服务</b>；</p>
+    <p style="margin:0 0 10px;">3、关闭前，<b>请务必把您在网页版创建的项目逐个导出备份，或迁移到 wendust 手机 App 中继续创作</b>，以防数据丢失。迁移方式非常简单：在网页版把项目导出为 ZIP，再用手机 App 的"从备份恢复"导入即可，一分钟就能完成。</p>
+    <p style="margin:0 0 10px;">关于大家可能关心的几个问题，也一并说明：网页版的免费云端空间在关闭后由手机 App 的免费云端无缝承接，账号体系完全一致，无需重新注册；已购买或抽奖获得的云端扩容、语法槽位、限定称号等权益，全部在手机端继续生效，一分不少；过去在网页版遇到的任何遗留问题，欢迎通过手机 App 内的联系方式反馈，我们会认真对待每一条留言。</p>
+    <p style="margin:0 0 10px;">对于本次下线给各位带来的诸多不便，我们致以最诚挚的歉意。收缩战线从来不是因为退缩，而是为了把一件事做到极致——手机端会带着网页版的那份心意继续前进，以更快的更新、更稳的体验、更多的新功能，回报每一位留下的用户。</p>
+    <p style="margin:0 0 6px;">最后，再次感谢每一位使用过、支持过、陪伴过 wendust 网页版的你。江湖不远，手机端见！</p>
+    <p style="margin:0;text-align:right;color:#7A8095;">—— wendust 运营团队 · 2026 年 10 月 18 日</p>
+  </div>
+  <div style="text-align:right;padding:0 14px 10px;"><span onclick="document.getElementById('offline-notice').style.display='none';" style="color:#9AA0B0;font-size:12px;cursor:pointer;">收起公告</span></div>
+</div>
+<div class="ver-chip">RELEASE · v14.6.5.0</div>
+    <h1>在手机上开发应用</h1>
+    <p class="tagline">手机上的应用开发工具 · 网页三件套 <span class="mono">+</span> Android 原生</p>
+    <a class="dl" href="https://github.com/wendust/wendust/releases/latest">下载最新版 v14.6.5.0</a>
+    <p class="dl-note">安卓 APK · 21 MB · 无需电脑 · 安装即用（托管于 GitHub）</p>
+    <p class="dl-note" style="margin-top:10px;">
+      也可以先在
+      <a href="index.html#offline-notice" onclick="document.getElementById('offline-notice').scrollIntoView();return false;">在线版已下线</a>
+      页面试用：浏览器里写代码、运行，生成分享码后导入 App 继续开发。
+    </p>
+  </div>
+</div>
+
+
+<section>
+  <div class="container">
+    <h2>这是什么</h2>
+    <p>wendust 是一个安卓应用，用来在手机上开发应用。你可以编写 HTML、CSS 和 JavaScript 做网页应用，随时切换预览看效果，最后把整个项目打包成 APK 安装包；也可以选 <b>Android 原生</b>路线，用 Java 和 XML 写界面，带语法高亮和图形化预览。写代码到打包安装，全程在手机上完成。</p>
+    <p>它的定位是小项目和随身修改：做一个计算器、一个展示页面、一个小游戏，或者在任何有手机的地方改几行代码。它定位于轻量开发场景，具体边界见下文说明。</p>
+    <p>除了手机 App，wendust 还有两个兄弟版本。<b>电脑版</b>（在浏览器打开 pc.html 即可使用）提供和手机版一致的项目管理与打包能力，支持直接打包 APK、Windows EXE 和 macOS DMG 三种格式，每日 10 次打包额度；<b>在线版</b>无需安装任何东西，打开网页就能写代码、一键分享。三个版本的项目通过分享码互通：手机上生成分享码，电脑版或在线版粘贴导入，反过来也一样。</p>
+    <p>适合想给自己做小工具的人、学开发的学生、出门在外要改代码的开发者。</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>主要功能</h2>
+
+    <h3>原生安卓绿界面（v14）</h3>
+    <p>整体视觉参考 AIDE 重做：绿色工具栏、绿色主按钮、浅绿底色，深色模式同步换装，历史自选主题色自动迁移。启动器图标同步换绿。</p>
+
+    <h3>HTML 教程（v14）</h3>
+    <p>内置 96 篇 HTML 教程，12 个章节覆盖从入门到精通：初识 HTML、文本格式、列表、链接图片、表格、表单、语义化、多媒体、HTML5 进阶、SVG 与 Canvas、CSS/JS 协作、最佳实践。每篇都有动手练习：看讲解、写代码、一键运行看效果，还能对照参考答案。全程离线，不用联网。</p>
+
+    <h3>自定义语法（v14）</h3>
+    <p>设置 → 语法：内置 xml、java、css、html、js 五大语法（不可删除、不可调整）。你可以创建自己的语法：起名字，然后为每个语法标记填上对应的 HTML、CSS 和 JS——运行时不解释你写的内容，直接按映射替换，预览和打包 APK 都生效。编辑器里自定义标记有专属高亮。限额：每 5 个月最多创建 1 个语法，每个语法每 7 天只能改 1 次名。</p>
+
+    <h3>项目管理</h3>
+    <p>创建、重命名、删除项目，更换项目头像。每个项目有独立的文件目录，所有文件存在手机本地。</p>
+
+    <h3>项目类型（v5.5）</h3>
+    <p>新建项目时先选路线：<b>HTML 网页</b>或 <b>Android 原生</b>。选网页就从七个模板起步；选原生则直接生成 Java + XML 骨架（AndroidManifest、MainActivity、activity_main.xml），生成完整的骨架，直接可改。</p>
+
+    <h3>Android 原生开发（v5.5）</h3>
+    <p>原生项目里用 Java 写逻辑、XML 写界面，两者都有语法高亮。原生项目新建文件时只提供 <code>.java</code> 和 <code>.xml</code> 两种类型，保持工程纯净。界面布局用<b>图形化预览</b>查看：解析你的 layout XML，把 TextView、Button、输入框、进度条等真实控件渲染到屏幕上——文字、颜色、图形、圆角、点击事件都能呈现，按钮按下去会触发对应的 onClick 演示。</p>
+
+    <h3>模板</h3>
+    <p>HTML 项目可以从模板开始：空白项目、计算器、待办清单、企业官网、个人主页、产品展示页、博客。模板提供完整的三个文件（index.html、style.css、script.js），结构可以直接用，把文字和图片换成自己的内容就是一个能用的页面。</p>
+
+    <h3>代码编辑</h3>
+    <p>语法高亮、代码补全、撤销重做、查找替换、跳转到指定行、快速注释。网页项目支持 <code>.html</code>、<code>.css</code>、<code>.js</code>、<code>.json</code>，原生项目支持 <code>.java</code>、<code>.xml</code>。</p>
+
+    <h3>资源导入</h3>
+    <p>长按项目，选「导入文件」，可以把手机里的图片、音频、视频导入项目的 assets 目录。代码里用 <code>assets/文件名</code> 引用，预览时图片直接显示，音乐和视频直接播放。导入时遇到重名文件会自动编号，不会覆盖。</p>
+
+    <h3>文件下载</h3>
+    <p>网页里调用 <code>wendustFile.download('assets/文件名')</code>，用户会看到一个深色的下载框，显示文件名和进度条，下载完成后文件保存在系统「下载」文件夹的 wendust 子目录里，用任何文件管理器都能找到。</p>
+
+    <h3>预览</h3>
+    <p>网页项目：编辑和预览在同一个界面，底部一键切换，预览使用项目自己的文件路径，样式、脚本、资源引用都和真实环境一致。原生项目：点「预览」进入图形化预览，界面按你的 layout XML 实时渲染。</p>
+
+    <h3>网页控制台</h3>
+    <p>菜单里打开「网页控制台」，可以查看网页的 console 输出和报错信息（包括行号），底部的输入框还能直接执行 JavaScript 语句，用来看变量的值或者测试一段逻辑。</p>
+
+    <h3>AI 助手</h3>
+    <p>两层设计。默认是内置的离线引擎，不联网也能用：可以回答常见问题、做数学计算、陪你闲聊，还能生成贪吃蛇、计算器、时钟、记事本这类完整的小应用代码，点「复制到项目」直接用。如果你想要更强的回答，去设置里填入自己的 API Key——支持 DeepSeek、智谱 GLM、通义千问的快捷预设，也支持任何 OpenAI 兼容接口，填好测试通过后，AI 对话就走你选的模型，并且带完整的对话历史。</p>
+
+    <h3>工具箱</h3>
+    <p>编辑器菜单里有 27 个开发工具：JSON 格式化和压缩、查找替换、全项目搜索、颜色选择器、CSS 渐变和阴影生成器、图片转 Base64、时间戳转换、px 和 rem 换算、密码生成器、占位文本生成、URL 编码解码、HTML 表格生成、导出项目 ZIP 等。大部分工具的结果可以一键插回代码。</p>
+
+    <h3>APK 打包</h3>
+    <p>把网页项目打包成安卓安装包。可以打测试包快速安装，也可以先生成签名证书再打正式包。打包好的 APK 存在项目里，可以直接安装、分享给别人，或者导出到下载文件夹。（原生项目目前支持编辑与图形化预览，暂不提供手机端打包。）</p>
+
+    <h3>高级功能与每日余额</h3>
+    <p>高级功能中心内置高级模板（记账本/番茄钟/密码生成器）、代码美化、代码压缩、项目 ZIP 导出等，每天 100 点余额、零点自动重置，基础功能不受影响。</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>上手指南</h2>
+    <p>第一次使用，照下面的步骤走一遍，大约十分钟就能做出第一个应用：</p>
+    <ol>
+      <li>打开 wendust，点右下角加号，输入应用名、选一个头像。v5.5 起先选<b>项目类型</b>：HTML 网页（选模板，第一次推荐「计算器」）或 Android 原生（自动生成骨架）。</li>
+      <li>进入编辑器。左侧是文件列表，中间是代码。网页项目点底部「预览」看效果；原生项目点「预览」进入图形化预览，界面控件直接呈现。</li>
+      <li>回到代码页，随便改一处文字，再切预览，确认改动生效。这就是 wendust 的基本节奏：改代码，切预览。</li>
+      <li>返回项目列表，长按你的项目，选「导入文件」，从相册选一张图片导入（网页项目）。</li>
+      <li>回到编辑器，在 HTML 里写 <code>&lt;img src="assets/你的图片.jpg"&gt;</code>，切到预览，图片就显示在应用里了。音频和视频同理。</li>
+      <li>觉得满意后，打开菜单，选「APK 打包（测试）」，等进度条走完，安装生成的 APK。它就是一个独立的应用，有自己的图标，会出现在桌面上。</li>
+    </ol>
+    <p>走完这六步，你就完成了从「用别人的软件」到「做自己的软件」的第一步。之后可以试试 AI 助手（说「帮我写一个贪吃蛇」）、网页控制台（看 console.log 输出）和工具箱，这些都在编辑器的菜单里。</p>
+    <p>进阶一点的玩法：想学安卓开发就创建一个原生项目，把 MainActivity.java 和 activity_main.xml 改成自己的样子，图形化预览里所见即所得；项目做多以后，用「新建文件夹」把文件归类整理；在电脑上打开电脑版，粘贴手机端生成的分享码，把项目变成 EXE 或 DMG 发给朋友。</p>
+    <p>每个功能的具体说明都在<a href="docs.html">官方文档</a>里，十三个章节覆盖了从安装到原生开发的完整流程，遇到问题先翻文档，再看常见问题。</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>它做不到什么</h2>
+    <p>提前说清楚，免得下载之后失望：</p>
+    <ul>
+      <li>原生项目（v5.5 新增）支持代码编辑、语法高亮、图形化预览和模拟运行（点运行按钮，按钮事件真的执行），<b>暂不支持在手机上打包 APK</b>。手机 App 打包的是网页项目——打包后本质上是 WebView 壳，调不了摄像头、蓝牙这类原生接口。</li>
+      <li>不能写后端代码。PHP、Python 等文件类型在 v2.2 已经移除，网页项目保留网页三件套加 JSON，原生项目保留 Java 和 XML。</li>
+      <li>手机屏幕终究不适合编辑大量代码。它适合小项目、学习和随身修改，大项目还是该用电脑。</li>
+      <li>不配 API Key 时，AI 助手用的是内置离线引擎，能力有限：认识常见问题、能生成几个内置应用，复杂需求需要自己配 API。</li>
+    </ul>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>常见问题</h2>
+
+    <h3>自定义语法能创建几个？改名有限制吗？</h3>
+    <p>内置的 xml、java、css、html、js 是基础语法，永久保留且不可删除、不可调整。自定义语法每 5 个月最多创建 1 个，创建后每 7 天只能修改 1 次名字——这是刻意的克制：逼自己想清楚再动手，做出的语言才经得起用。删除自定义语法不返还创建名额。</p>
+
+    <h3>HTML 教程要联网或付费吗？</h3>
+    <p>不用。96 篇教程全部内置在应用里，离线可看，免费无额度消耗。每篇的练习可以直接在教程页里写代码、运行、看参考答案，不用切去编辑器。</p>
+
+    <h3>原生项目和网页项目怎么选？</h3>
+    <p>新建项目时选择。<b>网页项目</b>用 HTML/CSS/JS，模板丰富，可以打包成 APK 安装到手机；<b>原生项目</b>用 Java 写逻辑、XML 写界面，有语法高亮和图形化预览（事件、文字、图形都能渲染），适合学习安卓开发和搭建真实界面，目前暂不支持手机端打包。</p>
+
+    <h3>原生项目的图形化预览支持什么？</h3>
+    <p>它解析 res/layout 下的 XML，把线性布局、文本、按钮、输入框、复选框、开关、进度条等渲染成真实控件——背景色、文字颜色、字号、粗体、圆角、内边距都会呈现。布局里写了 <code>android:onClick</code> 的按钮可以点击，会演示事件的触发。改完 XML 保存后回到预览页刷新即可。</p>
+
+    <h3>免费吗？</h3>
+    <p>应用本身免费，没有付费功能。AI 助手如果配自己的 API Key，费用由你的 API 账户产生。</p>
+
+    <h3>AI 助手联网吗？</h3>
+    <p>默认不联网，用的是打包在应用里的离线引擎。在设置里填了 API Key 之后，AI 对话才走你填的接口。</p>
+
+    <h3>打包出的应用还有水印吗？</h3>
+    <p>没有。v12.0.8 起彻底移除了水印，打包出的应用干干净净，历史项目重新打包也会自动清掉旧水印。</p>
+
+    <h3>打包出的应用里点链接、下载文件正常吗？</h3>
+    <p>正常。v12.0.8 起所有网页链接都在应用内直接打开（不会再弹出系统选择器），下载链接自动走系统下载管理，通知栏可见进度，不会出现"网页无法加载"的白屏。</p>
+
+    <h3>打包出的应用闪退怎么办？</h3>
+    <p>v12.0.5 已彻底修复：此前部分项目打包出的 APK 在安卓 11 及以上系统因资源文件对齐问题无法正常启动（是否触发与项目名称长度有关，看起来时好时坏）。升级到 v12.0.7 后重新打包即可，所有项目统一可靠。</p>
+
+    <h3>打包的 APK 能发给别人吗？</h3>
+    <p>能。测试包和正式包都可以直接分享 APK 文件，对方安装即可。正式包用自己的签名证书签名，升级时用同一个证书即可覆盖安装。</p>
+
+    <h3>手机 App 和电脑版、在线版有什么区别？</h3>
+    <p>手机 App 打包免费不限次数、去水印免费，资源导入支持手机里的任何文件；电脑版和在线版每日 10 次打包额度。三个版本的核心编辑能力一致，项目通过分享码互通。电脑版独有 EXE（Windows）和 DMG（macOS）打包，在线版无需安装、打开浏览器就能用。</p>
+
+    <h3>支持哪些资源格式？</h3>
+    <p>图片：png、jpg、gif、webp、svg、bmp。音频：mp3、wav、ogg、m4a、aac、flac。视频：mp4、webm、mov、mkv、avi。其他任意文件也可以导入并作为下载文件提供。v3.0 起导入会自动分类到 音乐 / 视频 / 图片 / 文件夹，重名文件自动加序号，不会互相覆盖。</p>
+
+    <h3>还需要下载资源包吗？</h3>
+    <p>不需要。v5.3 起架构升级，所有必需组件已直接打包进安装包，安装即可用。从旧版本升级上来会自动清理残留的资源文件，释放手机空间。</p>
+
+    <h3>高级功能的每日余额是什么？</h3>
+    <p>高级功能（高级模板、代码美化、代码压缩、项目 ZIP 导出等）每天有 100 点共享额度，用一次扣一次：高级模板 10 点、代码美化 5 点、代码压缩 3 点、ZIP 导出 5 点、代码片段 2 点。每天零点自动重置，不需要签到、不联网、不登录，余额存在手机本地。基础功能（编辑、预览、打包 APK、云端、AI 助手）永远免费，不消耗额度。</p>
+
+    <h3>项目数据存在哪里？换手机怎么办？</h3>
+    <p>项目全部存在手机本地，不上传服务器。换手机时用分享码把重要项目迁移过去：每个项目生成一段文本码，新手机上粘贴导入即可完整恢复。</p>
+
+    <h3>能离线用吗？</h3>
+    <p>编辑、预览、打包全程离线可用，不联网也完全正常。只有 AI 助手（配了 API Key 时）需要网络。</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>三个版本，怎么选</h2>
+    <p>手机 App、电脑版、在线版各有分工，按你的使用场景选择，也可以搭配着用：</p>
+    <ul>
+      <li><b>手机 App（主推）</b>——随时随地的完整开发环境。编辑、预览、导入手机文件、打包 APK 全部免费不限次，v5.5 起还支持 Android 原生项目开发。适合绝大多数场景。</li>
+      <li><b>电脑版</b>——浏览器打开即用（官网首页进入），独占 EXE / DMG 打包能力。想把网页应用发给 Windows 或 Mac 用户？电脑版一键打包成双击即用的程序。每日 10 次打包额度。</li>
+      <li><b>在线版</b>——零安装的轻量入口。临时写段代码、测试一个想法、不想装任何东西时用它。项目可一键生成分享码带走。</li>
+    </ul>
+    <p>三端项目通过分享码互通，同一个项目可以在手机上起稿、电脑上打包成 EXE 发给朋友。</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <h2>四种打包格式</h2>
+    <p>wendust 支持把同一个网页项目打包成四种格式，覆盖主流平台：</p>
+    <ul>
+      <li><b>APK（安卓）</b>——手机 App 直接打包，v1 + v2 双签名，安卓 5.0 以上均可安装。测试包即装即用，正式包用你自己的证书签名，可覆盖升级。</li>
+      <li><b>EXE（Windows）</b>——电脑版打包。单文件便携程序，双击自动调起浏览器运行应用，绿色免安装。</li>
+      <li><b>DMG（macOS）</b>——电脑版打包。标准 ISO9660 磁盘镜像，双击挂载后打开 pc.html 运行，符合 Mac 用户习惯。</li>
+      <li><b>AppImage（Linux）</b>——官网直接下载。自解压脚本 + 浏览器，下载后加执行权限即可运行。</li>
+    </ul>
+    <p>所有格式的打包都在本地完成，代码不上传任何服务器。</p>
+  </div>
+</section>
+
+<section id="download">
+  <div class="container">
+
+    <div class="sec-title" id="examples"><h2>在线示例</h2></div>
+    <p class="lead">单文件网页能做成什么样子？看这些 —— 全部由 wendust 的技术栈写成。</p>
+    <style>
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin:22px 0 34px}
+.ex-card{background:#131C30;border:1px solid #3B5F9E44;border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.ex-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(59,95,158,.4)}
+.ex-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.ex-card span{display:block;padding:12px 14px;color:#E8ECF4;font-size:15px;font-weight:700}
+    </style>
+    <div class="ex-grid">
+      <div class="ex-card">
+        <img src="examples/shots/tunnel.jpg" alt="3D 星际隧道" loading="lazy">
+        <span>3D 星际隧道</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/racer.jpg" alt="3D 公路跑酷" loading="lazy">
+        <span>3D 公路跑酷</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/globe.jpg" alt="3D 线框地球" loading="lazy">
+        <span>3D 线框地球</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/cube.jpg" alt="3D 魔方" loading="lazy">
+        <span>3D 魔方</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/snake.jpg" alt="贪吃蛇" loading="lazy">
+        <span>贪吃蛇</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/2048.jpg" alt="2048" loading="lazy">
+        <span>2048</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/breakout.jpg" alt="打砖块" loading="lazy">
+        <span>打砖块</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/flappy.jpg" alt="像素小鸟" loading="lazy">
+        <span>像素小鸟</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/mole.jpg" alt="打地鼠" loading="lazy">
+        <span>打地鼠</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/memory.jpg" alt="记忆翻牌" loading="lazy">
+        <span>记忆翻牌</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/nebula.jpg" alt="粒子星云" loading="lazy">
+        <span>粒子星云</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/rain.jpg" alt="数字雨" loading="lazy">
+        <span>数字雨</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/balls.jpg" alt="弹跳球物理" loading="lazy">
+        <span>弹跳球物理</span>
+      </div>
+      <div class="ex-card">
+        <img src="examples/shots/city.jpg" alt="霓虹城市" loading="lazy">
+        <span>霓虹城市</span>
+      </div>
+    </div>
+    <div class="sec-title"><h2>下载</h2></div>
+    <div class="version">
+      <div class="vhead">
+        <span class="vnum">v14.6.5.0</span>
+        <span class="badge">当前版本</span>
+      </div>
+      <p style="margin:0 0 12px;line-height:1.9;font-size:14px;color:#4a3f33;">wendust 从 2026 年 7 月的 v1.0 起步——那时它只做一件事：在手机上写网页三件套，一键打包成 APK。v5.5 引入 Android 原生路线，Java 和 XML 也能在手机上写了；v8 系列带来工作台与联网协作，v9 上线插件中心，五十个开源插件一键安装；v10 把模板、示例、片段、备份一次补齐；v12 系列专注打磨打包体验——独立包名、自定义版本、水印移除、链接内开、下载管理，直到 v12.0.8 完成打包稳定性大修并加入打包自检机制。而 v13.0 把 wendust 带进了云端时代：注册账号即拥有 200MB 免费加密云端——项目一键备份恢复、云端文件同步，密钥由你的密码在本地派生，密码本身从不出设备。v13.1 进一步带来同步仓库：账号中心一键把本地全部项目推送云端、云端独有的项目自动拉回，每个项目独立入仓，历史版本永久可回溯。历史版本中的独立版 wendust Pro 已于 2026 年 10 月正式下架：一人维护两款软件精力过于分散，其自绘弹窗体系与全部能力已并入 wendust 正线，此后 wendust 只发一个版本。v14.0.0 是一次焕新大版本：界面整体换成原生安卓绿（参考 AIDE 的桌面级 IDE 观感），内置 96 篇从入门到精通的 HTML 教程（每篇配可运行的练习），并带来自定义语法系统——在设置里创建自己的语言，为每个语法标记填上对应的 HTML、CSS 和 JS，运行时自动映射，配合内置的 xml、java、css、html、js 五大语法使用。v14.0.1 教程大修：96 篇正文全部扩写至千字级详讲（平均 1200 字）。v14.0.2 热修教程阅读：改用 WebView 原生测高加多轮重试，并加触摸放行兜底，部分机型上长文只能看到开头的问题彻底解决。v14.0.3 教程文风专业化：96 篇正文清除比喻拟人等 AI 式修辞（97 处），统一为直接专业的技术表述。v14.1.0 品牌扩展：LOGO 铸币的微尘货币上线，签到（连签 7 天加码）、课程练习、打包成功都能攒微尘；尘晶抽奖单抽 100 微尘、每日 20 次，中奖率 24%——传说档合计 0.6% 可中自定义语法槽位 +2、云端扩容 +1GB 与限定称号「造物主」，其余 76% 谢谢参与，概率内置公示，改名卡可跳过 7 天改名冷却，主界面顶栏即有「抽奖」入口，v14.1.2 修复设置 > 微尘页打开空白的布局问题；吉祥物小尘 Dusty 同步入驻微尘与抽奖页。v14.2.0 带来 wendustJS 原生能力桥：JavaScript 直接调用提示、震动、剪贴板读写、设备信息、分享、相机、相册选图、定位、保存文件等十项原生能力，打包 APK 时自动内置进你的项目——无需引入任何文件、零水印，编辑器预览同步生效；预览控制台新增网络面板，每个资源请求的路径与大小一目了然；模板中心同步上线「wendustJS 演示」模板。v14.3.0 积木编程正式回归：像搭积木一样拼网页逻辑——18 种积木覆盖事件、动作、变量与控制流，Switch 匹配块按变量值走分支、其余情况兜底；选块填参排好序，点「生成代码」即变成真正的 JavaScript 并自动挂载到 index.html，与手写代码共存互不覆盖。积木是代码的另一种生成方式，不是另一套系统。v14.4.0 积木大扩编：新增播放声音、设置背景图、读取输入框、跳出循环、随机数等 12 种指令方块，积木总数达到 30 种；编辑工具五件套上线——复制积木、撤销（60 步）、预览代码、清空积木与帮助；新建项目新增第三种类型「纯积木」，创建即带挂载壳与起步积木，全程不碰代码也能做出会响、会动、会变脸的应用。v14.5.0 把多邻国的「边学习边玩」搬进教程中心：96 课变身闯关地图，练习通关攒 XP 升级（见习学徒一路铸到传奇铸造主）、学习连击每满 7 天奖微尘、不看答案一次跑通记 3 星、每日目标可调 20/50/100 XP，通关当场弹反馈条加小尘鼓励语——即时正反馈、碎片化、平滑过渡到真代码，一套全齐。v14.6.0 把积木推上舞台：上传图片建角色、拖动摆位、换全屏背景，点角色选「绑积木」——放个「当点击角色」接任意动作，运行时点这张图就会执行。35 种积木，从分支匹配到舞台事件，一张图也能有自己的逻辑。v14.6.1 修掉了原生编译的一个老毛病：之前在手机上打包原生项目会报一串「org.eclipse.jdt...」的天书，其实是软件自己的错，不是你的代码错。现在编译器直接内置，离线就能打包，报错也说到具体行号。同日热修：舞台里添加的角色现在会即时同步到积木编辑器，绑积木不再扑空。又一热修：设过背景图的项目重开舞台必崩的问题已解，背景图正常显示。v14.6.4 给「边学边玩」补上动画的灵魂：练习通过反馈条滑入弹跳、XP 飘字上浮、首通星星依次点亮、连击达标呼吸庆祝——每一次正反馈都看得见。v14.6.4.9.4 上线课后答题与错题本：练习通关弹一道课后题，答对 +5 XP，答错或跳过存入错题本随时温故——用答案白嫖积分这条路被堵上了。文章阅读也改成直接完整显示，划不动成为历史。v14.6.4.9.5 把教程正文从 WebView 方框换成原生文字直铺，彻底去框。v14.6.4.9.6 修复教程练习误报「预览有报错：null」的问题，并修复部分机型上打包签名证书一直加载失效的老毛病——新设备打包的签名从此稳定，已装应用的覆盖升级不受影响。v14.6.4.9.7 积木第三次扩编：新增 20 种、总数 55，全新「判断」类目（判断是否为、是否存在、变量是否存在、是否操作）与弹窗问答、本地存档、滑动长按事件、角色说话气泡等实用块；原名有误的「Switch 匹配」更名「分支匹配」；纯积木项目代码改为只读，逻辑一律由积木生成；微尘上线兑换所——80 换改名卡、200 换语法槽位 +2、300 换云盘 +200MB、1000 点亮称号「造物主」，积分从此有真实用处。v14.6.4.9.8 给安装包做了一次大瘦身：54.3MB 降到 21.8MB（-60%），只是清掉了 AI 功能下架后遗留的无人调用本地库并全量重压缩——积木 55 种、判断类目、兑换所、代码锁，功能一个不少；签名证书不变，覆盖安装直接升级。v14.6.4.9.9 积木全面体检：「点击角色」「显示」「隐藏」「移动」「角色说话」五个角色积木因内部查找函数作用域错误此前全部静默失效，现已修复复活；生成代码统一加页面就绪保护、「打开链接」改为应用内跳转、「当点击舞台背景」不再被角色点击误触发。v14.6.5.0 界面大修：主界面顶部快捷区六入口全部露出（新建、教程、模板、示例、精选、社区），底部导航扩到四项，新用户首启有三屏引导，空项目页不再是白板；并新增应用内社区页——作品展示、问题求助、经验交流，站内直达。</p>
+      <p style="margin:0 0 12px;line-height:1.9;font-size:14px;color:#4a3f33;">两个月、五十余个版本的迭代记录，全部沉淀在 GitHub：完整更新日志、从 v8.0 起每一个可安装的历史版本，都在仓库里随时可查、可下载、可回溯。</p>
+      <a class="dl" href="https://github.com/wendust/wendust/releases/latest">下载 wendust v14.6.5.0</a>
+      <span class="vsize">完整更新日志与全部历史版本：<a href="https://github.com/wendust/wendust/releases" style="text-decoration:underline">GitHub Releases</a></span>
+    </div>
+    <p style="font-size:13px;color:#7a6a52;margin-top:8px;">需要电脑版或便携软件包？<a href="pc.html">点这里</a></p>
+  </div>
+</section>
+
+<section style="padding:32px 0 12px;text-align:center">
+  <div class="container" style="line-height:2.2">
+    <a href="pc.html" style="color:#e0aa63;font-size:15px;">电脑版与便携软件包下载</a><br>
+    <a href="spread.html" style="color:#a89880;font-size:14px;">推广资源 — 各平台标准文案</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">wendust · www.wendust.com</div>
+</footer>
+
+<script>
+(function(){
+  var hb = document.getElementById("hamburger");
+  var drawer = document.getElementById("drawer");
+  var mask = document.getElementById("drawer-mask");
+  function toggle(open){ drawer.classList.toggle("open", open); mask.classList.toggle("open", open); }
+  hb.addEventListener("click", function(){ toggle(!drawer.classList.contains("open")); });
+  mask.addEventListener("click", function(){ toggle(false); });
+  drawer.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ toggle(false); }); });
+})();
+</script>
+</body>
+</html>
+<!-- wendust build v14.6.5.0 -->

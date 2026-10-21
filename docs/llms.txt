@@ -1,0 +1,17 @@
+# wendust
+
+> wendust 是一款在手机上开发应用的安卓软件：用 HTML/CSS/JavaScript 或积木做出应用，一键打包成 APK，也支持 Android 原生 Java 项目，全程免电脑。内置 96 篇教程（每课带练习）、55 种积木、应用内社区与精选软件上架。
+
+wendust is a mobile IDE for Android: build apps with HTML/CSS/JavaScript or visual blocks, then package a installable APK on your phone — no PC required. Includes 96 tutorials with exercises, 55 block types, an in-app community, and featured app showcasing.
+
+## 页面
+
+- [首页](https://wendust.github.io/wendust/): 产品介绍、功能总览、下载入口
+- [文档](https://wendust.github.io/wendust/docs.html): 全功能使用文档
+- [打包指南](https://wendust.github.io/wendust/guide-pack.html): HTML 网页打包 APK 的完整流程
+- [Java 指南](https://wendust.github.io/wendust/guide-java.html): Android 原生 Java 项目开发指南
+
+## 下载
+
+- APK（免费）: https://github.com/wendust/wendust/releases/latest
+- 社区: https://wendust-community.surge.sh

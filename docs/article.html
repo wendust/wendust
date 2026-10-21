@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>没有电脑怎么学编程？在手机上写代码、打包成 APP 安装包的完整方法 — wendust</title>
+<meta name="description" content="没有电脑也能学编程：手机上写 HTML/CSS/JS 代码，实时预览，一键打包成安卓 APP 安装包。也支持 Java 原生项目。免费工具 wendust 完整介绍。">
+<meta name="keywords" content="没有电脑学编程,手机写代码,手机打包apk,手机上开发安卓应用,手机编程软件,安卓开发工具,免费编程工具,wendust">
+<meta property="og:title" content="没有电脑怎么学编程？手机上写代码、打包成 APP 的完整方法">
+<meta property="og:description" content="写代码、实时预览、一键打包安卓安装包，全程手机完成。免费。">
+<meta property="og:type" content="article">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:#ece3d4;line-height:1.9;background:#0f0c09;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -12%, rgba(224,170,99,.18), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 85% 30%, rgba(160,102,47,.10), transparent 65%),
+    radial-gradient(ellipse 90% 50% at 50% 108%, rgba(120,80,40,.12), transparent 62%);
+  background-attachment:fixed;
+}
+.container{max-width:720px;margin:0 auto;padding:0 22px}
+a{color:#f0c987}
+header{border-bottom:1px solid rgba(224,170,99,.18);padding:16px 0;background:rgba(15,12,9,.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:900}
+.logo-row{display:flex;align-items:center;gap:10px}
+.logo-row .name{font-weight:700;color:#f0c987;font-family:ui-monospace,Consolas,monospace;letter-spacing:2px;font-size:16px}
+.logo-row .back{margin-left:auto;font-size:13px;color:#a89880}
+
+/* 大字 hero */
+.hero{text-align:center;padding:64px 0 48px}
+.hero .kicker{font-size:13px;letter-spacing:4px;color:#a89880;font-family:ui-monospace,monospace}
+.hero h1{font-size:34px;line-height:1.4;margin:18px 0 14px;color:#fff;font-weight:800}
+.hero h1 .gold{color:#f0c987}
+.hero .sub{font-size:16px;color:#c2b39a;max-width:520px;margin:0 auto}
+.hero .big-dl{display:inline-block;margin-top:30px;background:linear-gradient(180deg,#f0c987,#d9a05b);color:#14100c;font-size:17px;font-weight:700;padding:15px 46px;border-radius:12px;text-decoration:none;box-shadow:0 4px 28px rgba(224,170,99,.35)}
+.hero .dl-note{font-size:12.5px;color:#7a6a52;margin-top:10px}
+
+/* 三步 */
+.steps{padding:26px 0 8px}
+.step{display:flex;gap:18px;align-items:flex-start;background:#1a140e;border:1px solid rgba(224,170,99,.2);border-radius:14px;padding:22px;margin-bottom:14px}
+.step .n{flex:0 0 44px;height:44px;border-radius:12px;background:rgba(224,170,99,.14);border:1.5px solid #e0aa63;color:#f0c987;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace}
+.step h3{font-size:17px;color:#fff;margin-bottom:4px}
+.step p{font-size:14.5px;color:#c2b39a}
+
+/* 功能卡 */
+.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 6px}
+@media (max-width:520px){.features{grid-template-columns:1fr}}
+.feat{background:#1a140e;border:1px solid rgba(224,170,99,.18);border-radius:12px;padding:18px}
+.feat .ico{font-size:24px;margin-bottom:8px;color:#f0c987;font-family:ui-monospace,monospace;font-weight:700}
+.feat h4{font-size:15px;color:#ece3d4;margin-bottom:4px}
+.feat p{font-size:13px;color:#a89880}
+
+/* 引用块 */
+.quote{border-left:3px solid #e0aa63;background:rgba(224,170,99,.07);border-radius:0 10px 10px 0;padding:16px 20px;margin:26px 0;font-size:15px;color:#e8cf9e}
+
+h2.sec{font-size:24px;color:#fff;margin:54px 0 16px;font-weight:800}
+h2.sec .bar{display:inline-block;width:34px;height:4px;background:#e0aa63;border-radius:2px;vertical-align:middle;margin-right:12px}
+p.body{font-size:15.5px;color:#c2b39a;margin:12px 0}
+p.body b{color:#ece3d4}
+
+/* FAQ */
+.faq{background:#1a140e;border:1px solid rgba(224,170,99,.18);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+.faq b{color:#f0c987;font-size:15px}
+.faq p{font-size:14px;color:#c2b39a;margin-top:6px}
+
+/* 底部 CTA */
+.cta{text-align:center;padding:60px 0 70px;background:rgba(224,170,99,.05);border-top:1px solid rgba(224,170,99,.15);margin-top:60px}
+.cta h2{font-size:26px;color:#fff;margin-bottom:10px}
+.cta p{color:#a89880;font-size:14px;margin-bottom:26px}
+footer{border-top:1px solid rgba(224,170,99,.15);padding:22px 0;text-align:center;color:#7a6a52;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="container logo-row">
+  <span class="name">wendust</span>
+  <a class="back" href="index.html">返回首页</a>
+</div></header>
+
+<!-- 大字开头 -->
+<div class="hero">
+  <div class="container">
+    <div class="kicker">NO PC ? NO PROBLEM</div>
+    <h1>没有电脑，<br>也能<span class="gold">做出一个 APP</span></h1>
+    <p class="sub">写代码、看效果、打包安装，全程只用一台安卓手机。免费，安装包只有 9.6MB。</p>
+    <a class="big-dl" href="https://wendust.surge.sh/downloads/wendust-v6.0.apk" download>免费下载 wendust</a>
+    <div class="dl-note">安卓 6.0+ · 无需电脑 · 无需配置环境</div>
+  </div>
+</div>
+
+<!-- 三步 -->
+<div class="steps">
+  <div class="container">
+    <div class="step">
+      <div class="n">1</div>
+      <div><h3>安装，打开就写</h3><p>装上就能用，没有 200MB 资源包、没有注册登录。新建项目，第一行代码十秒钟就能敲出来。</p></div>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <div><h3>实时预览</h3><p>左边写代码，右边看效果。改一行，界面立刻变。做计算器、个人主页、小游戏都可以。</p></div>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <div><h3>打包成 APP</h3><p>点一下打包，生成真正的安卓安装包。装到自己手机上，也可以发给别人。</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 功能卡 -->
+<section class="container" style="margin-top:40px">
+  <div class="features">
+    <div class="feat"><div class="ico">&lt;/&gt;</div><h4>网页应用</h4><p>HTML / CSS / JavaScript，7 个模板起步</p></div>
+    <div class="feat"><div class="ico">JAVA</div><h4>原生项目</h4><p>Java + XML 写安卓界面，带语法高亮</p></div>
+    <div class="feat"><div class="ico">▶</div><h4>模拟运行</h4><p>预览里的按钮真的执行你写的逻辑</p></div>
+    <div class="feat"><div class="ico">⇄</div><h4>分享码互通</h4><p>项目打包成码，换手机、传朋友都方便</p></div>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="sec"><span class="bar"></span>为什么做这个工具</h2>
+  <p class="body">很多人想学编程，最后放弃不是不想学，是<b>门槛</b>：没有电脑、不会配环境、教程跑不起来。手机明明就在手边，却没办法迈出第一步。</p>
+  <p class="body">wendust 把「写代码 → 看效果 → 打包安装」整条路搬到手机上。它不适合做大项目——它的目标是让<b>第一个 APP</b> 变得非常容易：一个计算器、一个表白页面、一个记事本。先做出东西，兴趣才留得住。</p>
+  <div class="quote">实际完成一个应用，是掌握开发流程最有效的方式。</div>
+  <p class="body">除了手机 App，还有<b>电脑版</b>（浏览器打开即用）和<b>在线版</b>（网页直接写），三个版本用分享码互通。手机上写一半，回家用电脑继续，不丢进度。</p>
+</section>
+
+<section class="container">
+  <h2 class="sec"><span class="bar"></span>常见问题</h2>
+  <div class="faq"><b>真的不需要电脑？</b><p>真的。写代码、预览、打包安装全部在手机上完成。</p></div>
+  <div class="faq"><b>要会多少基础？</b><p>网页路线只需要最基础的 HTML，模板里有能直接改的例子。原生路线需要一点 Java 基础。</p></div>
+  <div class="faq"><b>收费吗？</b><p>手机 App 免费。电脑版和在线版每日有打包额度。</p></div>
+  <div class="faq"><b>能做大项目吗？</b><p>它是随身开发工具，适合小项目和随手修改，不是专业 IDE。</p></div>
+</section>
+
+<div class="cta">
+  <div class="container">
+    <h2>即刻开始构建</h2>
+    <p>免费 · 9.6MB · 安卓 6.0 以上</p>
+    <a class="big-dl" href="https://wendust.surge.sh/downloads/wendust-v6.0.apk" download>免费下载 wendust</a>
+  </div>
+</div>
+
+<p class="body">相关：<a href="guide-pack.html" style="color:#e0aa63">手机上把网页打包成 APK</a> · <a href="guide-java.html" style="color:#e0aa63">手机上写 Java 安卓界面</a></p>
+<footer>wendust · www.wendust.com · <a href="index.html" style="color:#7a6a52">了解更多</a></footer>
+</body>
+</html>

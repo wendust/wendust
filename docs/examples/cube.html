@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>3D 魔方 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+document.body.innerHTML+=`<div id=w style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;perspective:900px"></div>`;
+const w=document.getElementById('w');
+w.innerHTML=`<div id=c style="width:150px;height:150px;position:relative;transform-style:preserve-3d"></div>`;
+const c=document.getElementById('c');
+const cols=['#D34C4C','#3B5F9E','#2FA35C','#F0B429','#7C3AED','#E8ECF4'];
+cols.forEach((col,i)=>{const f=document.createElement('div');
+f.style.cssText=`position:absolute;width:150px;height:150px;background:${col};opacity:.92;border:2px solid #0D1524;border-radius:8px;box-shadow:inset 0 0 30px rgba(0,0,0,.3)`;
+const t=[[0,0,75],[0,0,-75],[75,0,0],[-75,0,0],[0,75,0],[0,-75,0]][i];
+f.style.transform=`translate3d(${t[0]}px,${t[1]}px,${t[2]}px) ${i>3?`rotate${i===4?'X':'Y'}(${i===4?-90:i===5?90:i===2?90:-90}deg)`:''}`;
+c.appendChild(f)});
+let rx=-24,ry=38,vx=0,vy=.35,lx=0,ly=0,down=false;
+onpointerdown=e=>{down=true;lx=e.clientX;ly=e.clientY};onpointerup=()=>down=false;onpointermove=e=>{if(!down)return;ry+=(e.clientX-lx)*.5;rx-=(e.clientY-ly)*.5;lx=e.clientX;ly=e.clientY};
+function loop(){if(!down){ry+=vy}c.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;requestAnimationFrame(loop)}loop();
+document.getElementById('tip').textContent='拖动旋转魔方';
+</script></body></html>

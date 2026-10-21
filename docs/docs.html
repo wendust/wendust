@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wendust 官方文档</title>
+<meta name="description" content="wendust 官方文档：安装、项目创建、代码编辑、预览调试、打包分发与多端同步的完整技术指南。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:#24292f;line-height:1.9;background:#fbfaf8;
+  background-image:radial-gradient(ellipse 80% 40% at 50% -5%, rgba(217,160,91,.10), transparent 60%);
+}
+.container{max-width:760px;margin:0 auto;padding:0 22px}
+a{color:#b0722a;text-decoration:none}
+header{border-bottom:1px solid #eee5d8;padding:14px 0;background:rgba(251,250,248,.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:900}
+.logo-row{display:flex;align-items:center;gap:10px}
+.logo-mark{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:2px solid #c9924a;border-radius:7px;color:#c9924a;font-weight:800;font-size:14px;font-family:ui-monospace,Consolas,monospace}
+.logo-row .name{font-weight:700;font-size:18px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.5px}
+.logo-row .back{margin-left:auto;font-size:13px;color:#8b7d6b}
+.hero{background:linear-gradient(135deg,#241b10,#3d2c16);border-radius:14px;padding:30px 28px;margin:32px 0 8px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-30px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(224,170,99,.35),transparent 70%)}
+.hero h1{margin:0;color:#f0c987;font-family:ui-monospace,Consolas,monospace;letter-spacing:1px;position:relative}
+.hero .sub{margin:6px 0 0;color:#d9c5a0}
+h1{font-size:28px;margin:56px 0 8px}
+.sub{color:#8b7d6b;font-size:15px;margin-bottom:40px}
+h2{
+  font-size:21px;margin:48px 0 14px;padding:14px 18px;background:#fff;
+  border:1px solid #eee5d8;border-left:4px solid #d9a05b;border-radius:10px;
+  box-shadow:0 1px 6px rgba(120,90,40,.06);
+}
+h3{font-size:16px;margin:26px 0 10px;padding-left:12px;border-left:3px solid #e8cfa0;color:#4a3b28}
+p{margin:10px 0;font-size:15px;color:#4a3f30}
+ul,ol{margin:10px 0 10px 24px;font-size:15px;color:#4a3f30}
+li{margin:6px 0}
+li::marker{color:#c9924a}
+b{color:#24292f}
+code{background:#2a2118;color:#f0c987;border-radius:5px;padding:2px 7px;font-size:13px;font-family:ui-monospace,Consolas,monospace}
+pre{background:#221a12;border:1px solid #3d3121;border-radius:10px;padding:16px 18px;overflow-x:auto;margin:14px 0;box-shadow:inset 0 0 30px rgba(0,0,0,.25)}
+pre code{background:none;color:#e8ddc8;padding:0;font-size:13px}
+.note{background:#f2f8f4;border:1px solid #d8e8dc;border-left:4px solid #3f9d63;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px;color:#3a4a3e}
+.warn{background:#fdf6ec;border:1px solid #f0e2c8;border-left:4px solid #d9930b;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px;color:#5a4a2e}
+.toc{background:#fff;border:1px solid #eee5d8;border-radius:14px;padding:20px 24px;margin:28px 0;box-shadow:0 2px 12px rgba(120,90,40,.07)}
+.toc b{display:block;margin-bottom:10px;color:#b0722a;font-family:ui-monospace,Consolas,monospace;letter-spacing:1px}
+.toc a{display:flex;font-size:14px;padding:5px 8px;margin:1px -8px;border-radius:7px;color:#5a4c38;transition:background .15s}
+.toc a:hover{background:#f7efe2;color:#b0722a}
+.toc a::before{content:"›";margin-right:8px;color:#d9a05b;font-weight:700}
+footer{border-top:1px solid #eee5d8;margin-top:80px;padding:22px 0;text-align:center;color:#8b7d6b;font-size:13px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(120,90,40,.07)}
+th,td{border:1px solid #eee5d8;padding:9px 12px;text-align:left;color:#4a3f30}
+th{background:#f7efe2;color:#6b5028}
+</style>
+</head>
+<body>
+<header><div class="container logo-row">
+  <span class="logo-mark">W</span>
+  <span class="name">wendust 文档</span>
+  <a class="back" href="index.html">返回首页</a>
+</div></header>
+
+<div class="container">
+<div class="hero">
+  <h1>wendust 官方文档</h1>
+  <p class="sub">覆盖安装、开发、预览、打包与分发的完整工作流。</p>
+</div>
+
+<div class="toc">
+<b>目录</b>
+<a href="#install">一、安装与首次启动</a>
+<a href="#first">二、十分钟做出第一个应用</a>
+<a href="#files">三、文件管理与本地云盘</a>
+<a href="#preview">四、预览与全屏</a>
+<a href="#build">五、打包 APK</a>
+<a href="#share">六、分享码：三端互通</a>
+<a href="#ai">七、AI 助手</a>
+<a href="#toolbox">八、工具箱</a>
+<a href="#pc">九、电脑版与在线版</a>
+<a href="#advanced">十、高级功能与每日余额</a>
+<a href="#native">十一、Android 原生项目（v5.5）</a>
+<a href="#perf">十二、性能与设备适配</a>
+<a href="#theme">十三、主题与外观</a>
+<a href="#wendustjs">十四、wendustJS 原生能力（v14.2.0）</a>
+<a href="#blocks">十五、积木编程（v14.3.0）</a>
+<a href="#learn">十六、边学习边玩（v14.5.0）</a>
+<a href="#stage">十七、积木舞台（v14.6.0）</a>
+<a href="#learn2">十八、课后答题与错题本</a>
+<a href="#direct">十九、抽奖直达与免费云端</a>
+<a href="#native2">二十、原生编译离线内置</a>
+<a href="#faq">十八、常见问题</a>
+</div>
+
+<h2 id="install">一、安装与首次启动</h2>
+<p>wendust 是一个安卓应用，安装包（APK）可以从官网首页下载。因为不是应用商店分发，部分手机安装时会提示「未知来源」，在系统设置里允许当前浏览器安装应用即可，这是安卓的标准流程，不会有安全问题。</p>
+<p>v5.3 起安装后直接进入主界面，没有任何前置下载（旧版需要下载的 200MB 资源包已打包进安装包，从旧版本升级会自动清理残留文件）。安装包约 10MB，下载即装即用。</p>
+<div class="warn">v5.2 及更早版本首次启动需要下载 200MB 资源包；升级到 v5.3 后不再需要，旧资源文件会被自动清理。</div>
+
+<h2 id="first">二、十分钟做出第一个应用</h2>
+<h3>1. 新建项目</h3>
+<p>在主界面点击右下角悬浮按钮（FAB）创建项目，填写应用名称并设置头像。初次使用建议选择「计算器」模板——该模板为可完整运行的示例应用，便于验证开发全流程；也可选择空白模板从零构建，或通过「输入分享码」导入既有项目。</p>
+<h3>2. 认识编辑器</h3>
+<p>进入编辑器后，左侧是文件树，中间是代码区，底部是「代码 / 预览」切换标签。默认的三个文件就是网页开发的经典三件套：</p>
+<ul>
+<li><code>index.html</code> — 页面结构（骨架）</li>
+<li><code>style.css</code> — 样式（皮肤）</li>
+<li><code>script.js</code> — 逻辑（灵魂）</li>
+</ul>
+<h3>3. 改代码看效果</h3>
+<p>把 <code>index.html</code> 里的标题文字改成任何你想要的，切到底部「预览」标签——改动立即生效。改完代码切预览会自动刷新，不需要手动点运行。</p>
+<h3>4. 打包安装</h3>
+<p>在编辑器右上角菜单选择「打包测试 APK」，输入大于当前值的版本号，等待构建完成。生成的 APK 可直接安装至设备，此时应用即为独立程序：具有独立图标、显示于桌面，并支持分发给任意用户安装。</p>
+
+<h2 id="files">三、文件管理与本地云盘</h2>
+<p>文件管理在 v3.0 重点重做、v3.1 起又加入了独立的本地云盘。项目内导入的文件自动归类，项目之外还有一个不限容量的私人云盘。</p>
+<h3>自动分类</h3>
+<p>通过「文件 → 加号 → 导入文件」或首页「长按项目 → 导入文件」选择的文件，会按类型放进对应文件夹：</p>
+<table>
+<tr><th>文件类型</th><th>去处</th><th>代码里的引用路径</th></tr>
+<tr><td>HTML / CSS / JS / JSON</td><td>项目根目录</td><td>直接用文件名</td></tr>
+<tr><td>MP3 / WAV / FLAC 等音频</td><td>assets/音乐/</td><td><code>assets/音乐/文件名.mp3</code></td></tr>
+<tr><td>MP4 / MOV / MKV 等视频</td><td>assets/视频/</td><td><code>assets/视频/文件名.mp4</code></td></tr>
+<tr><td>JPG / PNG / GIF 等图片</td><td>assets/图片/</td><td><code>assets/图片/文件名.jpg</code></td></tr>
+<tr><td>TXT / MD / PDF / DOC 等文档</td><td>assets/文档/</td><td><code>assets/文档/文件名.txt</code></td></tr>
+<tr><td>其他类型</td><td>assets/文件/</td><td><code>assets/文件/文件名</code></td></tr>
+</table>
+<p>同名文件不会互相覆盖：如果目录里已经有 <code>音乐.mp3</code>，再导入一个同名文件会自动变成 <code>音乐(1).mp3</code>，彻底杜绝「文件重复」的问题。</p>
+<h3>新建文件夹</h3>
+<p>两种方式：在编辑器中依次点击「文件 → 新建 → 新建文件夹」；或长按文件树中的目标目录，选择「新建文件夹」在其内部创建。</p>
+<h3>重命名</h3>
+<p>长按文件树里的任何文件或文件夹，选「重命名」。重命名后代码引用需要同步修改。</p>
+<h3>删除</h3>
+<p>同样是长按，选「删除」。删除文件夹会连带里面的全部内容，系统会弹窗确认。</p>
+<div class="note">在代码里放一首音乐：<code>&lt;audio src="assets/音乐/我的歌.mp3" controls&gt;&lt;/audio&gt;</code>。放一张图片：<code>&lt;img src="assets/图片/照片.jpg"&gt;</code>。预览和打包后的 APK 里都能正常加载。</div>
+
+<h3>本地云盘（v3.1 起）</h3>
+<p>主菜单里的「本地云盘」是一个独立于项目的私人存储空间，容量不限、数据全部在手机本地：</p>
+<ul>
+<li><b>新建文档</b>——创建 Markdown 文件，编辑器底部有「Markdown 预览」按钮，实时渲染标题、列表、代码块、粗斜体和链接</li>
+<li><b>新建文件夹</b>——在当前位置建立子目录，可多级嵌套</li>
+<li><b>导入文件</b>——任意类型，多选批量导入</li>
+<li><b>导入文件夹</b>——从系统文件选择器挑一个整文件夹，递归导入全部内容并保持原目录结构</li>
+<li><b>下载</b>——长按文件或文件夹导出到系统「下载」目录；文件夹自动打包成 ZIP</li>
+<li><b>导航</b>——点文件夹进入，返回键或工具栏箭头逐级返回</li>
+</ul>
+<p>云盘与项目资源相互独立：云盘文件不参与 APK 打包，适合存笔记、备份、常用素材；要用到项目里就从云盘下载后按第一章的方式导入项目。</p>
+
+<h2 id="preview">四、预览与全屏</h2>
+<p>底部「代码 / 预览」标签随时切换。预览工具栏有三个模式按钮：</p>
+<ul>
+<li><b>手机</b> — 按手机屏幕宽度渲染（默认）</li>
+<li><b>电脑</b> — 按桌面宽度渲染，方便测试响应式布局</li>
+<li><b>全屏</b> — 沉浸式全屏预览，隐藏状态栏和导航栏，右上角有半透明退出按钮，按返回键也可以退出</li>
+</ul>
+<p>预览里的 <code>console.log</code>、报错信息可以在「网页控制台」（编辑器菜单）里看到，控制台底部还能直接执行 JS 代码。</p>
+<p>预览页面里的文件链接（比如 <code>&lt;a href="assets/文档/说明书.txt"&gt;</code>）点击后直接下载到系统「下载/wendust」目录，不弹对话框。</p>
+
+<h2 id="build">五、打包 APK</h2>
+<p>编辑器右上角菜单提供两种打包：</p>
+<ul>
+<li><b>打包测试 APK</b> — 用内置调试证书签名，适合自己装、发给朋友测试</li>
+<li><b>打包正式 APK</b> — 可配置自己的签名证书（设置里管理），适合正式发布</li>
+</ul>
+<p>打包前需要设置应用头像（长按项目 → 更换头像）。版本号必须大于当前版本号，系统会自动填好建议值。</p>
+<p><b>去水印是免费的</b>：打包时勾选「去水印」即可去掉右下角的 made by wendust 标记，没有任何次数限制或付费。</p>
+<p>手机 App 端打包不限次数。电脑版和在线版每天各有 10 次打包额度，第二天自动重置。</p>
+<div class="note">打包出的 APK 如果要在应用商店发布，记得用「正式打包」并保管好你的签名证书——同一证书才能发同一应用的更新版。</div>
+
+<h2 id="share">六、分享码：三端互通</h2>
+<p>分享码是 wendust 的项目传输机制：以文本形式编码项目全部代码文件，全程不经过服务器，可通过微信/QQ 等即时通讯工具直接传递。</p>
+<h3>格式</h3>
+<pre><code>年-月-日-时:分:秒:毫秒-随机三位数-来源平台-WDZ编码内容</code></pre>
+<p>来源平台会标注这段码的出生地：<code>AndroidAPP</code>（手机 App）、<code>在线</code>（网页版）、<code>PCAPP</code>（电脑版）。</p>
+<h3>怎么用</h3>
+<ul>
+<li><b>导出</b>：手机 App 长按项目 → 复制分享码（自动写入剪贴板）；网页版点击「分享」。</li>
+<li><b>导入</b>：在任一端创建项目时选择「导入分享码」并粘贴即可；若剪贴板中已包含有效分享码，App 端将自动填充。</li>
+</ul>
+<p>分享码只包含代码文件（HTML/CSS/JS 等），图片音乐等资源因为体积大不包含在内——把项目发给朋友后，让对方自己导入同名资源即可。</p>
+
+<h2 id="ai">七、编辑器三连击（v11.0.0 新增）</h2>
+<p>v11.0.0 功能大版本，编辑器三项能力升级，同时 wendustAI 网页服务停止运营：</p>
+<ul>
+<li><b>查找</b> — 编辑器菜单选择「查找」，输入关键词循环定位并高亮匹配，移动端找代码不再靠肉眼。</li>
+<li><b>自动保存</b> — 切换应用、锁屏、退出的瞬间自动保存当前文件，忘记保存丢代码成为历史。</li>
+<li><b>导出单文件网页</b> — 菜单选择「导出单文件网页」，CSS 与 JS 自动内联进一个 HTML，生成后直接分享，对方浏览器打开即看。</li>
+</ul>
+<p>wendustAI（wendustai.surge.sh）已停止运营，App 内 AI 联网配置入口同步移除。产品聚焦核心开发体验：写代码、看效果、出安装包。</p>
+
+<h2 id="toolbox">八、工具箱</h2>
+<p>编辑器菜单里的「工具箱」有 26 个开发工具，常用的包括：</p>
+<ul>
+<li>代码片段库、HTML 表格生成器、Meta 标签生成器</li>
+<li>CSS 渐变生成器、阴影生成器、颜色选择器</li>
+<li>JSON 格式化/校验、Base64 编解码、时间戳转换</li>
+<li>下载按钮模板（一键插入带进度条的深色下载按钮）</li>
+<li>设备信息、正则测试、密码生成等</li>
+</ul>
+
+<h2 id="pc">九、电脑版与在线版</h2>
+<p>除手机 App 外，wendust 有两个「轻量兄弟」，适合不同的使用场景：</p>
+<table>
+<tr><th></th><th>手机 App</th><th>电脑版</th><th>在线版</th></tr>
+<tr><td>大项目</td><td>支持（自动适配性能）</td><td>支持（IndexedDB 大容量存储）</td><td>支持</td></tr>
+<tr><td>打包 APK</td><td>不限次数</td><td>每日 10 次</td><td>每日 10 次</td></tr>
+<tr><td>打包 EXE / DMG</td><td>—</td><td>支持</td><td>—</td></tr>
+<tr><td>AI 助手</td><td>有</td><td>无</td><td>无</td></tr>
+<tr><td>分享码</td><td>AndroidAPP</td><td>PCAPP</td><td>在线</td></tr>
+</table>
+<p>电脑版为单文件网页应用：从官网下载 .exe（Windows）、.dmg（macOS）或 .AppImage（Linux）后即可直接运行，无需安装。Windows 版启动后将自动在默认浏览器中打开 wendust PC；macOS 版需先挂载磁盘镜像，再打开其中的 pc.html。在线版在浏览器中访问官网「在线编程」页面即可开始开发。</p>
+<p>电脑版的打包对话框支持三种输出：APK（安卓安装包）、EXE（Windows 便携程序）、DMG（macOS 磁盘镜像）。三者共享每日 10 次的打包额度。生成的 DMG 是标准 ISO9660 镜像，在 Mac 上双击挂载即可，Windows 和 Linux 用户也可以用 7-Zip 等工具打开它。</p>
+<div class="note">EXE 和 DMG 里装的就是你的项目网页本身，收到的朋友双击运行即可，不需要安装 wendust，也不需要任何开发环境。</div>
+
+<h2 id="advanced">十、高级功能与每日余额</h2>
+<p>v5.3 新增「高级功能」中心，入口在编辑器菜单和主菜单里。所有高级功能共享每日 100 点的余额，零点自动重置：</p>
+<ul>
+<li><b>高级模板</b>（10 点）——记账本、番茄钟、密码生成器三个完整可运行的高级应用模板，一键插入当前项目</li>
+<li><b>代码美化</b>（5 点）——把压缩成一团的 HTML / CSS / JS 重新排版成缩进清晰的规范格式</li>
+<li><b>代码压缩</b>（3 点）——去掉注释和多余空白，体积减小、加载更快，适合打包发布前使用</li>
+<li><b>项目 ZIP 导出</b>（5 点）——整个项目（含资源）打成一个 zip 导出到下载目录，方便备份或转到电脑</li>
+<li><b>专业代码片段</b>（2 点）——Toast 提示、深色模式切换、LocalStorage 存储三套常用代码</li>
+<li><b>今日统计</b>（免费）——查看当前余额和今日消耗明细</li>
+</ul>
+<p>余额与消耗记录只存在手机本地，不联网、不登录、不签到。每日额度用完时，高级功能当天不可用（基础功能不受影响），零点自动恢复 100 点。v5.3 起资源包下载也一并取消——安装即用。</p>
+
+<h2 id="native">十一、Android 原生项目（v5.5 起）</h2>
+<p>v5.5 新增的第二条开发路线。新建项目时先选<b>项目类型</b>：</p>
+<ul>
+<li><b>HTML 网页</b> — 原有路线：模板起步、网页三件套、打包 APK</li>
+<li><b>Android 原生</b> — 用 Java 写逻辑、XML 写界面，更接近真正的安卓开发</li>
+</ul>
+<h3>原生骨架</h3>
+<p>选择原生后<b>不会再出现模板选择</b>，直接生成一套可读性强的完整骨架：</p>
+<pre><code>我的应用/
+├─ AndroidManifest.xml          应用清单（包名、入口 Activity）
+├─ java/com/wendust/我的应用/
+│  └─ MainActivity.java         入口：一个按钮 + 点击计数 + Toast
+└─ res/layout/
+   └─ activity_main.xml         界面布局：垂直线性布局 + 文本 + 按钮</code></pre>
+<h3>语法高亮</h3>
+<p>Java 和 XML 文件都有语法高亮：关键字紫色、字符串绿色、注释灰色、XML 标签红色、属性橙色，One Dark 配色，深浅主题下都清晰。</p>
+<h3>新建文件</h3>
+<p>原生项目里新建文件只提供 <code>.java</code> 和 <code>.xml</code> 两种类型，新建弹窗和提示会自动切换成「原生文件」——保持工程结构纯净，不会混进无关文件。</p>
+<h3>图形化预览</h3>
+<p>点底部的「预览」标签，原生项目会打开<b>图形化预览</b>：读取 <code>res/layout</code> 下的 XML，把布局渲染成屏幕上的真实控件：</p>
+<ul>
+<li><b>布局</b> — 线性布局（水平/垂直）、居中、内边距、子控件间距</li>
+<li><b>文字</b> — TextView 的文字内容、字号、颜色、粗体；EditText 输入框；Button 按钮</li>
+<li><b>图形</b> — 背景色块、圆角、ProgressBar 进度条、Switch 开关、CheckBox 复选框</li>
+<li><b>事件</b> — 布局里写了 <code>android:onClick="方法名"</code> 的按钮可以点击，触发时会弹出「已触发事件」提示，交互逻辑看得见摸得着</li>
+</ul>
+<p>状态栏显示渲染统计信息（控件数量与耗时）。修改 XML 并保存后，返回预览页点击「刷新」即可加载最新界面。</p>
+<h3>真实模拟运行（v6.0）</h3>
+<p>点击「运行」后，预览器将解析 <code>MainActivity.java</code> 中的事件处理代码并在预览环境中<b>实际执行</b>：findViewById 控件绑定、变量自增（count++）、setText 动态更新界面文本、Toast 提示等。点击预览中的控件即可观察到界面状态的实际变更。当前支持基础语法结构，条件与循环等复杂控制流仍需真机验证，后续版本将逐步扩展支持。</p>
+<h3>云盘文件徽标（v6.0）</h3>
+<p>本地云盘的文件图标从表情符号换成类型徽标：文件夹金色 D、网页蓝色 WEB、图片绿色 IMG、音频紫色 AUD、视频红色 VID、文档橙色 DOC，Java 和 XML 有专属徽标（JV / XML），一眼分清文件类型。</p>
+<div class="note">原生项目当前支持代码编辑、语法高亮与图形化预览，<b>暂不支持在设备端构建 APK</b>（打包入口将显示相应说明）。如需生成安装包，请使用 HTML 项目路线。</div>
+
+<h2 id="perf">十二、性能与设备适配</h2>
+<p>3.0 版本开始，wendust 会自动检测你的手机配置并标注性能等级：</p>
+<ul>
+<li><b>高性能</b> — 内存充裕的设备，所有功能全开</li>
+<li><b>标准</b> — 绝大多数设备，默认体验</li>
+<li><b>省电模式</b> — 低内存设备，超大文件编辑时给出提示</li>
+</ul>
+<p>等级可以在「设置 → 关于」里查看。大型项目（几十个文件、上 MB 的代码）在「省电模式」设备上建议把大文件拆分成多个小文件，体验会流畅很多。</p>
+<div class="note">为什么大文件会卡？手机的文本编辑控件渲染超大文本时的开销远大于桌面浏览器。经验值：单个文件保持在 300KB 以内，任何设备都流畅。</div>
+
+<h2 id="theme">十三、主题与外观</h2>
+<p>设置里的「主题」提供三个选项：</p>
+<ul>
+<li><b>跟随系统</b>（默认）— 系统切深色它就深色</li>
+<li><b>浅色</b> — 白底深字</li>
+<li><b>深色</b> — 暗底亮字</li>
+</ul>
+<p>选择即时生效，无需重启。3.0 移除了旧版的「界面颜色」自定义（换成统一的品牌色），同时修复了浅色模式下部分按钮文字看不清的问题。</p>
+
+<h2 id="wendustjs">十四、wendustJS 原生能力（v14.2.0 新增）</h2>
+<p>wendustJS 让你的 JavaScript 直接调用手机原生能力。打包 APK 时自动内置到你的项目里——<b>无需引入任何文件</b>；编辑器预览与全屏预览中同样自动生效。全局对象为 <code>wendust</code>。</p>
+<pre><code>// 显示系统级提示
+wendust.toast('保存成功');
+// 震动 300 毫秒
+wendust.vibrate(300);
+// 设备信息（返回 Promise）
+wendust.deviceInfo().then(d =&gt; console.log(d.model));
+// 复制到剪贴板（返回 Promise）
+wendust.copy('要复制的文本').then(() =&gt; wendust.toast('已复制'));</code></pre>
+<h3>能力清单</h3>
+<ul>
+<li><b>wendust.toast(text)</b> — 系统提示。预览与打包后均可用</li>
+<li><b>wendust.vibrate(ms)</b> — 震动指定毫秒。预览与打包后均可用</li>
+<li><b>wendust.copy(text) / wendust.paste()</b> — 剪贴板读写。预览与打包后均可用</li>
+<li><b>wendust.deviceInfo()</b> — 系统版本、SDK、机型、屏幕。打包后返回真实信息</li>
+<li><b>wendust.share(text, subject)</b> — 调起系统分享。预览与打包后均可用</li>
+<li><b>wendust.camera() / wendust.pickImage()</b> — 拍照 / 相册选图。打包后可用</li>
+<li><b>wendust.locate()</b> — 定位（自动申请运行时权限）。打包后可用</li>
+<li><b>wendust.saveFile(data, fileName)</b> — 保存到系统「下载/wendust」。打包后可用</li>
+</ul>
+<p>预览中调用需要系统授权的能力时，会得到明确的「打包 APK 后即可调用」提示，不提供假数据。打包出的 APK 零水印、无任何附加标识。</p>
+<h3>快速体验</h3>
+<p>模板中心已内置「wendustJS 演示」模板，五个按钮对应五项能力，创建项目即可对照学习。</p>
+<h2 id="blocks">十五、积木编程（v14.3.0 上线 / v14.4.0 扩编）</h2>
+<p>不用记语法，像搭积木一样把网页逻辑拼出来：选一块积木、填上参数、排好顺序，点「生成代码」就变成真正的 JavaScript。生成文件为 <code>blocks.js</code>，并自动挂载到 index.html——与手写代码共存，重新生成即更新，其他文件不受影响。</p>
+<h3>入口</h3>
+<p>主界面顶栏「积木」、设置 > 更多功能「积木」行、编辑器菜单「积木」三处均可进入，选择项目后开始搭建。积木用于网页项目；原生项目继续用 Java 编辑器。</p>
+<h3>积木清单（55 种）</h3>
+<ul>
+<li><b>事件</b> — 当页面加载完成 / 当点击元素（填 CSS 选择器）/ 每隔秒数执行</li>
+<li><b>动作</b> — 弹窗消息 / 原生提示与震动（wendustJS）/ 设置元素文字 / 设置元素样式 / 显示、隐藏、切换元素 / 打开链接</li>
+<li><b>变量</b> — 设置变量（数字或文本）/ 变量增加一个数</li>
+<li><b>控制</b> — 如果（比较变量与值，可带否则）/ Switch 匹配 / 匹配值与其余情况 / 循环 N 次 / 等待秒数 / 当条件成立就循环（内置一万次防卡死护栏）/ 跳出循环</li>
+<li><b>动作扩展（v14.4.0）</b> — 播放声音 / 设置背景图 / 读取元素文字存入变量 / 读取输入框内容存入变量 / 设置元素属性 / 滚动到元素 / 设置网页标题 / 复制到剪贴板（wendustJS）/ 分享文本（wendustJS）</li>
+<li><b>变量扩展（v14.4.0）</b> — 随机数存入变量</li>
+</ul>
+<h3>Switch 怎么用</h3>
+<p>先「设置变量」或用现有变量，再放一个「Switch 匹配」块并填变量名；在 Switch 里点「放入子块」添加「匹配值」——填上可能的取值，把命中后要做的积木放进该分支；需要兜底就再加「其余情况」。程序运行时按变量的实际值走对应分支，和手写 switch/case 完全等价。</p>
+<h3>编辑工具（v14.4.0）</h3>
+<p>每块积木带「复制」（连同子块整棵克隆，插到原块后面）；编辑器菜单有「撤销」（回退最近结构改动，最多 60 步）、「预览代码」（生成前先看 JavaScript 原文，满意再写入）、「清空积木」与「帮助」。</p>
+<h3>纯积木项目（v14.4.0）</h3>
+<p>新建项目时选「积木」类型：创建即自带挂载好的壳页面与起步积木（页面加载后向界面写一句话），打开积木编辑器直接搭逻辑，点「生成代码」即可运行——全程不碰代码。</p>
+<h3>生成与修改</h3>
+<p>点「生成代码」时，积木树转译为 blocks.js 写入项目并在 index.html 挂载引用。blocks.js 由积木生成，手改内容会在下次生成时被覆盖；需要手写逻辑时直接写自己的文件或编辑器里的其他代码，互不影响。预览与打包均可直接运行生成的代码。</p>
+<h2 id="learn">十六、边学习边玩（v14.5.0 新增）</h2>
+<p>教程中心全面游戏化。目录顶部是<b>学习状态卡</b>：等级称号、累计 XP、学习连击天数、每日目标进度与已通关课数，点击卡片可查看完整统计并把每日目标调成 20 / 50 / 100 XP。</p>
+<ul>
+<li><b>XP 与等级</b> — 完成课练习首通 +30 XP；重复练每天每课再 +10 XP。每 100 XP 升一级：见习学徒 → 铸造学徒 → 微尘铸造师 → 高级铸造师 → 传奇铸造主</li>
+<li><b>学习连击</b> — 当天有练习通关就续一天火焰，断一天归零重计；每满 7 天奖励 30 微尘</li>
+<li><b>课程星级</b> — 不看参考答案一次跑通记 3 星，看过答案记 2 星，保留历史最好成绩</li>
+<li><b>闯关路径</b> — 已通关的课实时打勾并显示星级，未通关的第一课自动标注「建议从这课继续」</li>
+<li><b>即时正反馈</b> — 练习运行当场弹反馈条：通关有 XP 入账与小尘鼓励语；预览报错红条给出具体错误信息（报错不扣任何东西，改完跑通就有 XP）；每日目标达成奖励 15 微尘，升级与连击里程碑都有专属弹窗</li>
+</ul>
+<p>学习奖励与微尘账本打通：连击里程碑与每日目标达成的微尘自动入账，可在「设置 > 微尘」查看明细。微尘除了用于抽奖，还可在微尘页「兑换所」固定价格直购：改名卡 80/张、语法槽位 +2 为 200、云盘 +200MB 为 300、称号「造物主」1000。</p>
+<h2 id="native-fix">关于原生项目编译（v14.6.1 重要修复）</h2>
+<p>此前版本里，原生项目打包会报「编译失败：org.eclipse.jdt.internal.compiler.batch.Main」——这是软件自身的缺陷（编译器格式与安卓不兼容），与你的代码无关。v14.6.1 起：编译器已内置，离线可用；代码有语法错误时会显示<b>具体文件与行号</b>；编译器异常时提示重置重试，不再甩锅。</p>
+<h2 id="learn2">十八、边学边玩：动画、课后答题与错题本（v14.6.4.9.4 新增）</h2>
+<p>教程中心全面动画化：练习通过的反馈条滑入弹跳、XP 飘字上浮、首次通关星星依次点亮（看答案 2 星、独立跑通 3 星）、连击满 7 天/每日目标达成/升级时呼吸脉冲庆祝。</p>
+<ul>
+<li><b>课后答题</b> — 练习通关后弹出一道课后选择题（12 章题库轮换出题），答对 +5 XP；答错或跳过自动存入<b>错题本</b></li>
+<li><b>错题本</b> — 教程工具栏右上「错题本」，答错/跳过的题随时温故重练，答对消除错题再 +3 XP——只看参考答案刷积分的路走不通了</li>
+<li><b>文章完整显示</b> — 课程正文改为原生文字直铺页面（v14.6.4.9.5），完整显示、永不划不动</li>
+</ul>
+<h2 id="direct">十九、抽奖直达与免费云端（v14.6.4.9.1 ~ .9.3）</h2>
+<ul>
+<li><b>抽奖直达</b> — 设置里的「微尘」入口点进直接到抽奖页；抽奖页新增「去签到赚微尘」入口，双向一步直达</li>
+<li><b>免费云端</b> — 「云盘」全面更名为「云端」：注册即送的 200MB 免费加密云端；抽奖容量奖励同步为「云端容量 +1GB / +200MB」</li>
+</ul>
+<h2 id="native2">二十、原生编译离线内置（v14.6.1 重要修复）</h2>
+<p>此前原生项目打包会报「编译失败：org.eclipse.jdt...」——这是软件自身的缺陷。v14.6.1 起编译器（ECJ + D8）以安卓专用格式内置进 wendust：<b>离线可用、不再联网下载</b>；代码有语法错误时显示具体文件与行号，编译器异常时提示重置重试。</p>
+<h2 id="stage">十七、积木舞台（v14.6.0 新增）</h2>
+<p>积木编辑器工具栏点「舞台」，给项目配一个场景。背景可在 10 色色带里选纯色，或上传图片当全屏背景。</p>
+<ul>
+<li><b>添加角色</b> — 从相册选一张图，它就站上舞台；按住拖动摆位置，点一下角色可以变大变小、重命名、删除</li>
+<li><b>给每个图片绑积木</b> — 点角色选「绑积木」，回到积木编辑器时顶部会多出该角色的积木组 Tab；放「当点击角色」再接任意动作，运行时点这张图就会执行</li>
+<li><b>舞台积木（共 5 种）</b> — 当点击角色、当点击舞台背景、显示角色、隐藏角色、移动角色到；角色在积木里按名字下拉选择，删除角色后转译会明确报错提示</li>
+          <li><b>判断积木（v14.6.4.9.7，共 4 种）</b> — 判断是否为（数字/文本/空值/布尔）、判断是否存在（CSS 选择器）、判断变量是否存在、判断是否操作（点击过屏幕/输入过内容/点击过元素）；均带「否则」分支，与「如果」用法一致</li>
+          <li><b>实用新块（v14.6.4.9.7，共 16 种）</b> — 应用内打开链接、询问弹窗（确定/取消）、输入弹窗存答案、执行一段 JS、设置输入框内容、添加或移除样式类、禁用或启用元素、保存到本地存档、从本地存档读出、文本长度存入变量、文本转数字存入变量、当前时间存入变量、当输入框内容变化、当滑动屏幕、当长按元素、角色说话（气泡）</li>
+<li><b>主程序与角色互不干扰</b> — 顶部 Tab 在「主程序」和各角色之间切换，各自一棵积木树</li>
+<li><b>自适应</b> — 角色位置与宽度按百分比存储，运行时任何屏幕都不变形</li>
+</ul>
+<h2 id="faq">十八、常见问题</h2>
+<h3>打包失败怎么办？</h3>
+<p>3.0 已经修复了部分机型（如真我 V30）的签名兼容问题。如果仍然失败，注意错误提示文字：提示「版本号」相关的按提示调大版本号重试；提示存储相关的检查手机剩余空间（打包需要约等于项目两倍的临时空间）。</p>
+<h3>安装打包出来的 APK 提示「未安装」？</h3>
+<p>最常见原因是手机上已经装过同包名的旧版本但签名不同。先卸载旧版再装新版。自己手机上测试时尽量一直用同一种打包方式（测试包或正式包），不要混用。</p>
+<h3>预览白屏？</h3>
+<p>打开「网页控制台」查看错误信息。多数问题由 JavaScript 语法错误引起，控制台将显示对应行号。</p>
+<h3>导入的文件在预览里加载不出来？</h3>
+<p>检查引用路径是否带了分类文件夹名，例如音乐文件要写 <code>assets/音乐/文件名.mp3</code>，不能只写文件名。路径里的大小写也要完全一致。</p>
+<h3>分享码导入失败？</h3>
+<p>请确认已完整复制分享码（自日期前缀至编码结尾）。部分即时通讯工具会对长文本折行或截断，缺失任意字符均将导致解码失败。App 端导入界面可自动识别剪贴板中的分享码。</p>
+<h3>原生项目能打包 APK 吗？</h3>
+<p>原生项目支持代码编辑、Java/XML 语法高亮、图形化预览和模拟运行，暂不支持在手机上打包 APK。想在手机上直接出安装包的应用，用 HTML 网页项目即可。</p>
+<h3>原生项目的预览和真机效果一样吗？</h3>
+<p>图形化预览按布局 XML 渲染真实控件，文字内容、配色、间距、进度条、开关及按钮交互反馈均可直接查看。但预览环境不执行完整 Java 代码——业务逻辑需通过真机验证。</p>
+<h3>资源包下载中断了？</h3>
+<p>v5.3 起已移除资源包下载机制，该问题不复存在。旧版本升级至 v5.3 后，未完成的资源文件将被自动清理。</p>
+
+</div>
+<footer>wendust · www.wendust.com · 文档对应版本 v14.6.5.0</footer>
+</body>
+</html>
+<!-- wendust build v14.6.5.0 up2 -->

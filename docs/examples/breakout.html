@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>打砖块 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();onresize=R;
+let px=W/2,ball={x:W/2,y:H*.6,vx:4,vy:-4},lives=3,score=0,alive=true;
+const bricks=[];const BN=6,BR=8;
+for(let i=0;i<BN;i++)for(let j=0;j<BR;j++)bricks.push({x:20+i*((W-40)/BN),y:60+j*34,w:(W-40)/BN-8,h:26,hue:i*45+j*20});
+onpointermove=e=>px=e.clientX;onpointerdown=e=>px=e.clientX;
+function loop(){if(!alive)return;x.fillStyle='#0D1524';x.fillRect(0,0,W,H);
+const PW=90;
+x.fillStyle='#8FB3E8';x.fillRect(px-PW/2,H-50,PW,12);
+x.fillStyle='#F0B429';x.beginPath();x.arc(ball.x,ball.y,9,0,7);x.fill();
+bricks.forEach(b=>{if(!b.h)return;x.fillStyle=`hsl(${b.hue},70%,60%)`;x.fillRect(b.x,b.y,b.w,b.h);
+if(ball.x>b.x&&ball.x<b.x+b.w&&ball.y>b.y&&ball.y<b.y+b.h){b.h=0;ball.vy*=-1;score+=10}});
+ball.x+=ball.vx;ball.y+=ball.vy;
+if(ball.x<9||ball.x>W-9)ball.vx*=-1;if(ball.y<9)ball.vy*=-1;
+if(ball.y>H-58&&ball.y<H-40&&ball.x>px-PW/2&&ball.x<px+PW/2){ball.vy=-Math.abs(ball.vy);ball.vx+=(ball.x-px)*.06}
+if(ball.y>H){lives--;if(lives<=0){alive=false}else{ball={x:W/2,y:H*.6,vx:4,vy:-4}}}
+document.getElementById('tip').textContent=`得分 ${score} · 生命 ${lives}`;
+requestAnimationFrame(loop)}loop();
+</script></body></html>

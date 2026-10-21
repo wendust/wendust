@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>霓虹城市 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);const x=c.getContext('2d');
+let W,H,t=0;function R(){W=c.width=innerWidth;H=c.height=innerHeight;gen()}R();onresize=()=>{};
+function gen(){}
+const bs=[];for(let i=0;i<26;i++)bs.push({x:i*(innerWidth/26)+4,w:innerWidth/26-8,h:40+Math.random()*innerHeight*.45,hue:190+Math.random()*140});
+const ws=[];bs.forEach(b=>{for(let k=0;k<b.h*b.w/700;k++)ws.push({b,dx:Math.random()*(b.w-8),dy:Math.random()*(b.h-10),tw:Math.random()*6.28})});
+function loop(){t+=.016;const g=x.createLinearGradient(0,0,0,H);
+g.addColorStop(0,'#0D1524');g.addColorStop(.55,'#1B2A4A');g.addColorStop(1,'#24406E');
+x.fillStyle=g;x.fillRect(0,0,W,H);
+x.fillStyle='rgba(240,180,41,.9)';x.beginPath();x.arc(W*.78,H*.16,34,0,7);x.fill();
+bs.forEach(b=>{x.fillStyle=`hsl(${b.hue},35%,16%)`;x.fillRect(b.x,H-b.h,b.w,b.h);
+x.fillStyle=`hsl(${b.hue},70%,60%)`;x.fillRect(b.x,H-b.h,b.w,3)});
+ws.forEach(w=>{const on=Math.sin(t*2+w.tw)>-.25;
+x.fillStyle=on?`hsl(${w.b.hue},70%,70%)`:'rgba(36,50,78,.6)';
+x.fillRect(w.b.x+w.dx,H-w.b.h+w.dy+6,5,7)});
+x.fillStyle='rgba(13,21,36,.5)';x.fillRect(0,H*.86,W,H*.14);
+bs.forEach(b=>{x.fillStyle=`hsla(${b.hue},70%,55%,.25)`;x.fillRect(b.x,H*.86,b.w,H*.13)});
+document.getElementById('tip').textContent='wendust · 用代码点亮城市';
+requestAnimationFrame(loop)}loop();
+</script></body></html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<title>3D 星际隧道 - wendust 示例</title>
+<style>html,body{margin:0;height:100%;background:#0D1524;overflow:hidden;touch-action:none}canvas{display:block}#tip{position:fixed;top:10px;left:0;right:0;text-align:center;color:#8FA0BC;font:13px/1.6 system-ui;pointer-events:none}#back{position:fixed;top:10px;left:10px;color:#8FB3E8;text-decoration:none;font:14px system-ui;background:rgba(13,21,36,.7);padding:8px 14px;border-radius:10px;z-index:9}</style></head>
+<body><a id="back" href="../index.html#examples">返回</a><div id="tip"></div>
+<script>
+const c=document.createElement('canvas');document.body.appendChild(c);
+const x=c.getContext('2d');let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}
+R();onresize=R;
+const stars=[];for(let i=0;i<160;i++)stars.push({a:Math.random()*6.28,r:Math.random(),z:Math.random()});
+let t=0,speed=.012,steer=0;
+onpointerdown=()=>steer=Math.random()*2-1;onpointerup=()=>steer=0;
+function loop(){t+=speed;x.fillStyle='rgba(13,21,36,.35)';x.fillRect(0,0,W,H);
+const cx=W/2,cy=H/2;
+stars.forEach(s=>{s.z-=speed*6;if(s.z<=0){s.z=1;s.a=Math.random()*6.28;s.r=Math.random()}
+const px=cx+Math.cos(s.a+t*steer)*s.r*(W*.5)*(1-s.z),py=cy+Math.sin(s.a+t*steer)*s.r*(H*.5)*(1-s.z);
+const sz=(1-s.z)*6;if(sz<.3)return;
+x.fillStyle=`hsl(${(s.r*360+t*40)%360},80%,${40+ (1-s.z)*50}%)`;
+x.fillRect(px-sz/2,py-sz/2,sz,sz);
+const px2=cx+Math.cos(s.a+t*steer)*s.r*(W*.5)*(1-(s.z+speed*6>1?1:s.z+speed*6));
+const py2=cy+Math.sin(s.a+t*steer)*s.r*(H*.5)*(1-(s.z+speed*6>1?1:s.z+speed*6));
+x.strokeStyle=x.fillStyle;x.lineWidth=sz*.4;x.beginPath();x.moveTo(px,py);x.lineTo(px2,py2);x.stroke();});
+document.getElementById('tip').textContent='点按屏幕转向 · '+Math.round(t*speed*3000+120)+' km/h';
+requestAnimationFrame(loop)}loop();
+</script></body></html>
