@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moileonegramg 官方文档</title>
-<meta name="description" content="Moileonegramg 官方文档：安装、项目创建、代码编辑、预览调试、打包分发与多端同步的完整技术指南。">
+<title>wendust 官方文档</title>
+<meta name="description" content="wendust 官方文档：安装、项目创建、代码编辑、预览调试、打包分发与多端同步的完整技术指南。">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -55,13 +55,13 @@ th{background:#f7efe2;color:#6b5028}
 <body>
 <header><div class="container logo-row">
   <span class="logo-mark">W</span>
-  <span class="name">Moileonegramg 文档</span>
+  <span class="name">wendust 文档</span>
   <a class="back" href="index.html">返回首页</a>
 </div></header>
 
 <div class="container">
 <div class="hero">
-  <h1>Moileonegramg 官方文档</h1>
+  <h1>wendust 官方文档</h1>
   <p class="sub">覆盖安装、开发、预览、打包与分发的完整工作流。</p>
 </div>
 
@@ -80,7 +80,7 @@ th{background:#f7efe2;color:#6b5028}
 <a href="#native">十一、Android 原生项目（v5.5）</a>
 <a href="#perf">十二、性能与设备适配</a>
 <a href="#theme">十三、主题与外观</a>
-<a href="#Moileonegramgjs">十四、wendustJS 原生能力（v14.2.0）</a>
+<a href="#wendustjs">十四、wendustJS 原生能力（v14.2.0）</a>
 <a href="#blocks">十五、积木编程（v14.3.0）</a>
 <a href="#learn">十六、边学习边玩（v14.5.0）</a>
 <a href="#stage">十七、积木舞台（v14.6.0）</a>
@@ -91,7 +91,7 @@ th{background:#f7efe2;color:#6b5028}
 </div>
 
 <h2 id="install">一、安装与首次启动</h2>
-<p>Moileonegramg 是一个安卓应用，安装包（APK）可以从官网首页下载。因为不是应用商店分发，部分手机安装时会提示「未知来源」，在系统设置里允许当前浏览器安装应用即可，这是安卓的标准流程，不会有安全问题。</p>
+<p>wendust 是一个安卓应用，安装包（APK）可以从官网首页下载。因为不是应用商店分发，部分手机安装时会提示「未知来源」，在系统设置里允许当前浏览器安装应用即可，这是安卓的标准流程，不会有安全问题。</p>
 <p>v5.3 起安装后直接进入主界面，没有任何前置下载（旧版需要下载的 200MB 资源包已打包进安装包，从旧版本升级会自动清理残留文件）。安装包约 10MB，下载即装即用。</p>
 <div class="warn">v5.2 及更早版本首次启动需要下载 200MB 资源包；升级到 v5.3 后不再需要，旧资源文件会被自动清理。</div>
 
@@ -152,7 +152,7 @@ th{background:#f7efe2;color:#6b5028}
 <li><b>全屏</b> — 沉浸式全屏预览，隐藏状态栏和导航栏，右上角有半透明退出按钮，按返回键也可以退出</li>
 </ul>
 <p>预览里的 <code>console.log</code>、报错信息可以在「网页控制台」（编辑器菜单）里看到，控制台底部还能直接执行 JS 代码。</p>
-<p>预览页面里的文件链接（比如 <code>&lt;a href="assets/文档/说明书.txt"&gt;</code>）点击后直接下载到系统「下载/Moileonegramg」目录，不弹对话框。</p>
+<p>预览页面里的文件链接（比如 <code>&lt;a href="assets/文档/说明书.txt"&gt;</code>）点击后直接下载到系统「下载/wendust」目录，不弹对话框。</p>
 
 <h2 id="build">五、打包 APK</h2>
 <p>编辑器右上角菜单提供两种打包：</p>
@@ -161,12 +161,12 @@ th{background:#f7efe2;color:#6b5028}
 <li><b>打包正式 APK</b> — 可配置自己的签名证书（设置里管理），适合正式发布</li>
 </ul>
 <p>打包前需要设置应用头像（长按项目 → 更换头像）。版本号必须大于当前版本号，系统会自动填好建议值。</p>
-<p><b>去水印是免费的</b>：打包时勾选「去水印」即可去掉右下角的 made by Moileonegramg 标记，没有任何次数限制或付费。</p>
+<p><b>去水印是免费的</b>：打包时勾选「去水印」即可去掉右下角的 made by wendust 标记，没有任何次数限制或付费。</p>
 <p>手机 App 端打包不限次数。电脑版和在线版每天各有 10 次打包额度，第二天自动重置。</p>
 <div class="note">打包出的 APK 如果要在应用商店发布，记得用「正式打包」并保管好你的签名证书——同一证书才能发同一应用的更新版。</div>
 
 <h2 id="share">六、分享码：三端互通</h2>
-<p>分享码是 Moileonegramg 的项目传输机制：以文本形式编码项目全部代码文件，全程不经过服务器，可通过微信/QQ 等即时通讯工具直接传递。</p>
+<p>分享码是 wendust 的项目传输机制：以文本形式编码项目全部代码文件，全程不经过服务器，可通过微信/QQ 等即时通讯工具直接传递。</p>
 <h3>格式</h3>
 <pre><code>年-月-日-时:分:秒:毫秒-随机三位数-来源平台-WDZ编码内容</code></pre>
 <p>来源平台会标注这段码的出生地：<code>AndroidAPP</code>（手机 App）、<code>在线</code>（网页版）、<code>PCAPP</code>（电脑版）。</p>
@@ -178,13 +178,13 @@ th{background:#f7efe2;color:#6b5028}
 <p>分享码只包含代码文件（HTML/CSS/JS 等），图片音乐等资源因为体积大不包含在内——把项目发给朋友后，让对方自己导入同名资源即可。</p>
 
 <h2 id="ai">七、编辑器三连击（v11.0.0 新增）</h2>
-<p>v11.0.0 功能大版本，编辑器三项能力升级，同时 MoileonegramgAI 网页服务停止运营：</p>
+<p>v11.0.0 功能大版本，编辑器三项能力升级，同时 wendustAI 网页服务停止运营：</p>
 <ul>
 <li><b>查找</b> — 编辑器菜单选择「查找」，输入关键词循环定位并高亮匹配，移动端找代码不再靠肉眼。</li>
 <li><b>自动保存</b> — 切换应用、锁屏、退出的瞬间自动保存当前文件，忘记保存丢代码成为历史。</li>
 <li><b>导出单文件网页</b> — 菜单选择「导出单文件网页」，CSS 与 JS 自动内联进一个 HTML，生成后直接分享，对方浏览器打开即看。</li>
 </ul>
-<p>MoileonegramgAI（Moileonegramgai.surge.sh）已停止运营，App 内 AI 联网配置入口同步移除。产品聚焦核心开发体验：写代码、看效果、出安装包。</p>
+<p>wendustAI（wendustai.surge.sh）已停止运营，App 内 AI 联网配置入口同步移除。产品聚焦核心开发体验：写代码、看效果、出安装包。</p>
 
 <h2 id="toolbox">八、工具箱</h2>
 <p>编辑器菜单里的「工具箱」有 26 个开发工具，常用的包括：</p>
@@ -197,7 +197,7 @@ th{background:#f7efe2;color:#6b5028}
 </ul>
 
 <h2 id="pc">九、电脑版与在线版</h2>
-<p>除手机 App 外，Moileonegramg 有两个「轻量兄弟」，适合不同的使用场景：</p>
+<p>除手机 App 外，wendust 有两个「轻量兄弟」，适合不同的使用场景：</p>
 <table>
 <tr><th></th><th>手机 App</th><th>电脑版</th><th>在线版</th></tr>
 <tr><td>大项目</td><td>支持（自动适配性能）</td><td>支持（IndexedDB 大容量存储）</td><td>支持</td></tr>
@@ -206,9 +206,9 @@ th{background:#f7efe2;color:#6b5028}
 <tr><td>AI 助手</td><td>有</td><td>无</td><td>无</td></tr>
 <tr><td>分享码</td><td>AndroidAPP</td><td>PCAPP</td><td>在线</td></tr>
 </table>
-<p>电脑版为单文件网页应用：从官网下载 .exe（Windows）、.dmg（macOS）或 .AppImage（Linux）后即可直接运行，无需安装。Windows 版启动后将自动在默认浏览器中打开 Moileonegramg PC；macOS 版需先挂载磁盘镜像，再打开其中的 pc.html。在线版在浏览器中访问官网「在线编程」页面即可开始开发。</p>
+<p>电脑版为单文件网页应用：从官网下载 .exe（Windows）、.dmg（macOS）或 .AppImage（Linux）后即可直接运行，无需安装。Windows 版启动后将自动在默认浏览器中打开 wendust PC；macOS 版需先挂载磁盘镜像，再打开其中的 pc.html。在线版在浏览器中访问官网「在线编程」页面即可开始开发。</p>
 <p>电脑版的打包对话框支持三种输出：APK（安卓安装包）、EXE（Windows 便携程序）、DMG（macOS 磁盘镜像）。三者共享每日 10 次的打包额度。生成的 DMG 是标准 ISO9660 镜像，在 Mac 上双击挂载即可，Windows 和 Linux 用户也可以用 7-Zip 等工具打开它。</p>
-<div class="note">EXE 和 DMG 里装的就是你的项目网页本身，收到的朋友双击运行即可，不需要安装 Moileonegramg，也不需要任何开发环境。</div>
+<div class="note">EXE 和 DMG 里装的就是你的项目网页本身，收到的朋友双击运行即可，不需要安装 wendust，也不需要任何开发环境。</div>
 
 <h2 id="advanced">十、高级功能与每日余额</h2>
 <p>v5.3 新增「高级功能」中心，入口在编辑器菜单和主菜单里。所有高级功能共享每日 100 点的余额，零点自动重置：</p>
@@ -232,7 +232,7 @@ th{background:#f7efe2;color:#6b5028}
 <p>选择原生后<b>不会再出现模板选择</b>，直接生成一套可读性强的完整骨架：</p>
 <pre><code>我的应用/
 ├─ AndroidManifest.xml          应用清单（包名、入口 Activity）
-├─ java/com/Moileonegramg/我的应用/
+├─ java/com/wendust/我的应用/
 │  └─ MainActivity.java         入口：一个按钮 + 点击计数 + Toast
 └─ res/layout/
    └─ activity_main.xml         界面布局：垂直线性布局 + 文本 + 按钮</code></pre>
@@ -256,7 +256,7 @@ th{background:#f7efe2;color:#6b5028}
 <div class="note">原生项目当前支持代码编辑、语法高亮与图形化预览，<b>暂不支持在设备端构建 APK</b>（打包入口将显示相应说明）。如需生成安装包，请使用 HTML 项目路线。</div>
 
 <h2 id="perf">十二、性能与设备适配</h2>
-<p>3.0 版本开始，Moileonegramg 会自动检测你的手机配置并标注性能等级：</p>
+<p>3.0 版本开始，wendust 会自动检测你的手机配置并标注性能等级：</p>
 <ul>
 <li><b>高性能</b> — 内存充裕的设备，所有功能全开</li>
 <li><b>标准</b> — 绝大多数设备，默认体验</li>
@@ -274,26 +274,26 @@ th{background:#f7efe2;color:#6b5028}
 </ul>
 <p>选择即时生效，无需重启。3.0 移除了旧版的「界面颜色」自定义（换成统一的品牌色），同时修复了浅色模式下部分按钮文字看不清的问题。</p>
 
-<h2 id="Moileonegramgjs">十四、wendustJS 原生能力（v14.2.0 新增）</h2>
-<p>wendustJS 让你的 JavaScript 直接调用手机原生能力。打包 APK 时自动内置到你的项目里——<b>无需引入任何文件</b>；编辑器预览与全屏预览中同样自动生效。全局对象为 <code>Moileonegramg</code>。</p>
+<h2 id="wendustjs">十四、wendustJS 原生能力（v14.2.0 新增）</h2>
+<p>wendustJS 让你的 JavaScript 直接调用手机原生能力。打包 APK 时自动内置到你的项目里——<b>无需引入任何文件</b>；编辑器预览与全屏预览中同样自动生效。全局对象为 <code>wendust</code>。</p>
 <pre><code>// 显示系统级提示
-Moileonegramg.toast('保存成功');
+wendust.toast('保存成功');
 // 震动 300 毫秒
-Moileonegramg.vibrate(300);
+wendust.vibrate(300);
 // 设备信息（返回 Promise）
-Moileonegramg.deviceInfo().then(d =&gt; console.log(d.model));
+wendust.deviceInfo().then(d =&gt; console.log(d.model));
 // 复制到剪贴板（返回 Promise）
-Moileonegramg.copy('要复制的文本').then(() =&gt; Moileonegramg.toast('已复制'));</code></pre>
+wendust.copy('要复制的文本').then(() =&gt; wendust.toast('已复制'));</code></pre>
 <h3>能力清单</h3>
 <ul>
-<li><b>Moileonegramg.toast(text)</b> — 系统提示。预览与打包后均可用</li>
-<li><b>Moileonegramg.vibrate(ms)</b> — 震动指定毫秒。预览与打包后均可用</li>
-<li><b>Moileonegramg.copy(text) / Moileonegramg.paste()</b> — 剪贴板读写。预览与打包后均可用</li>
-<li><b>Moileonegramg.deviceInfo()</b> — 系统版本、SDK、机型、屏幕。打包后返回真实信息</li>
-<li><b>Moileonegramg.share(text, subject)</b> — 调起系统分享。预览与打包后均可用</li>
-<li><b>Moileonegramg.camera() / Moileonegramg.pickImage()</b> — 拍照 / 相册选图。打包后可用</li>
-<li><b>Moileonegramg.locate()</b> — 定位（自动申请运行时权限）。打包后可用</li>
-<li><b>Moileonegramg.saveFile(data, fileName)</b> — 保存到系统「下载/Moileonegramg」。打包后可用</li>
+<li><b>wendust.toast(text)</b> — 系统提示。预览与打包后均可用</li>
+<li><b>wendust.vibrate(ms)</b> — 震动指定毫秒。预览与打包后均可用</li>
+<li><b>wendust.copy(text) / wendust.paste()</b> — 剪贴板读写。预览与打包后均可用</li>
+<li><b>wendust.deviceInfo()</b> — 系统版本、SDK、机型、屏幕。打包后返回真实信息</li>
+<li><b>wendust.share(text, subject)</b> — 调起系统分享。预览与打包后均可用</li>
+<li><b>wendust.camera() / wendust.pickImage()</b> — 拍照 / 相册选图。打包后可用</li>
+<li><b>wendust.locate()</b> — 定位（自动申请运行时权限）。打包后可用</li>
+<li><b>wendust.saveFile(data, fileName)</b> — 保存到系统「下载/wendust」。打包后可用</li>
 </ul>
 <p>预览中调用需要系统授权的能力时，会得到明确的「打包 APK 后即可调用」提示，不提供假数据。打包出的 APK 零水印、无任何附加标识。</p>
 <h3>快速体验</h3>
@@ -344,7 +344,7 @@ Moileonegramg.copy('要复制的文本').then(() =&gt; Moileonegramg.toast('已�
 <li><b>免费云端</b> — 「云盘」全面更名为「云端」：注册即送的 200MB 免费加密云端；抽奖容量奖励同步为「云端容量 +1GB / +200MB」</li>
 </ul>
 <h2 id="native2">二十、原生编译离线内置（v14.6.1 重要修复）</h2>
-<p>此前原生项目打包会报「编译失败：org.eclipse.jdt...」——这是软件自身的缺陷。v14.6.1 起编译器（ECJ + D8）以安卓专用格式内置进 Moileonegramg：<b>离线可用、不再联网下载</b>；代码有语法错误时显示具体文件与行号，编译器异常时提示重置重试。</p>
+<p>此前原生项目打包会报「编译失败：org.eclipse.jdt...」——这是软件自身的缺陷。v14.6.1 起编译器（ECJ + D8）以安卓专用格式内置进 wendust：<b>离线可用、不再联网下载</b>；代码有语法错误时显示具体文件与行号，编译器异常时提示重置重试。</p>
 <h2 id="stage">十七、积木舞台（v14.6.0 新增）</h2>
 <p>积木编辑器工具栏点「舞台」，给项目配一个场景。背景可在 10 色色带里选纯色，或上传图片当全屏背景。</p>
 <ul>
@@ -375,7 +375,7 @@ Moileonegramg.copy('要复制的文本').then(() =&gt; Moileonegramg.toast('已�
 <p>v5.3 起已移除资源包下载机制，该问题不复存在。旧版本升级至 v5.3 后，未完成的资源文件将被自动清理。</p>
 
 </div>
-<footer>Moileonegramg · www.Moileonegramg.com · 文档对应版本 v14.6.5.1</footer>
+<footer>wendust · www.wendust.com · 文档对应版本 v14.6.5.2</footer>
 </body>
 </html>
-<!-- Moileonegramg build v14.6.5.1 up2 -->
+<!-- wendust build v14.6.5.2 up2 -->
