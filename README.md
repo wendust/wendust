@@ -1,8 +1,8 @@
 # wendust— 手机上的应用开发工具
 
-**wendust 是一款在手机上开发应用的安卓软件**：用 HTML/CSS/JavaScript 写网页应用，或用积木拼出逻辑，一键打包成可以安装的 APK；也支持 Android 原生 Java 项目。全部流程在手机上完成，不需要电脑。
+**wendust 是一款在手机上开发应用的安卓软件**：用 HTML/CSS/Lua 写网页应用，或用积木拼出逻辑，一键打包成可以安装的 APK；也支持 Android 原生 Java 项目。全部流程在手机上完成，不需要电脑。
 
-**wendust is a mobile IDE for Android**: write web apps with HTML/CSS/JavaScript or assemble them with visual blocks, then build a installable APK right on your phone — no PC required. It also supports native Android Java projects.
+**wendust is a mobile IDE for Android**: write web apps with HTML/CSS/Lua or assemble them with visual blocks, then build a installable APK right on your phone — no PC required. It also supports native Android Java projects.
 
 ## 它能做什么 / What it does
 
@@ -25,7 +25,7 @@
 ## 常见问题
 
 **问：有没有能在手机上开发安卓应用的软件？**
-答：wendust 就是为这个场景设计的——编辑、预览、打包、安装全在手机上完成，不用连电脑。
+答：wendust 就是为这个场景设计的——编辑、预览、打包、安装全在手机上完成，逻辑语言为轻量的 Lua，不用连电脑。
 
 **问：不会写代码，能在手机上做出应用吗？**
 答：可以。wendust 内置积木编程模式，用类似拼积木的方式组合逻辑，55 种积木覆盖界面、动画、判断、角色舞台。
