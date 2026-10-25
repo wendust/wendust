@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karel 机器人编程教学 — 手机上学的第一门编程语言 | wendust</title>
+<meta name="description" content="Karel 机器人是斯坦福大学用了几十年的教学编程语言：用 move、turn_left、pick_beeper 等指令指挥机器人在网格世界里行动，边跑动画边学编程。wendust 手机 App 内置 Karel，无需电脑即可学习。">
+<meta name="keywords" content="karel机器人,儿童编程,编程入门,手机学编程,教学编程语言,python风格,手机写程序,wendust,karel教学">
+<meta property="og:title" content="Karel 机器人编程教学 — 手机上学的第一门编程语言">
+<meta property="og:description" content="用 move、turn_left、pick_beeper 指挥机器人，边跑动画边学编程。wendust 内置，免费。">
+<meta property="og:type" content="article">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#ece3d4;line-height:1.9;background:#0f0c09}
+a{color:#e0aa09;text-decoration:none}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.hero{text-align:center;padding:64px 18px 40px}
+.hero h1{font-size:30px;color:#fff;margin-bottom:14px}
+.hero p{color:#b9aa8c;font-size:15px}
+.sec{font-size:22px;color:#fff;margin:44px 0 18px;display:flex;align-items:center;gap:10px}
+.bar{width:5px;height:24px;background:#e0aa09;border-radius:3px;display:inline-block}
+.body{color:#cfc3ab;font-size:15px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{border:1px solid #3a3125;padding:9px 12px;text-align:left;color:#cfc3ab}
+th{color:#e0aa09;background:#1a150e;white-space:nowrap}
+td code{color:#7fd48a;font-family:monospace}
+pre.kc{background:#151109;border:1px solid #3a3125;border-radius:12px;padding:16px;font-family:monospace;font-size:13.5px;color:#d8e6c8;overflow-x:auto;line-height:1.7;margin:12px 0 8px}
+pre.kc .c{color:#7f848e}
+pre.kc .k{color:#c678dd}
+pre.kc .f{color:#e06c75}
+.tip{background:#1a150e;border:1px solid #3a3125;border-radius:12px;padding:14px 16px;margin:16px 0;font-size:14px;color:#b9aa8c}
+.tip b{color:#e0aa09}
+.faq{background:#151109;border:1px solid #3a3125;border-radius:12px;padding:14px 16px;margin:12px 0}
+.faq b{color:#fff;font-size:15px}
+.faq p{color:#b9aa8c;font-size:14px;margin-top:6px}
+.ex{background:#151109;border:1px solid #3a3125;border-radius:14px;padding:18px 18px 12px;margin:20px 0}
+.ex h3{color:#e0aa09;font-size:17px;margin-bottom:10px}
+.ex .why{color:#b9aa8c;font-size:14px;margin:10px 0 4px}
+.cta{text-align:center;padding:54px 18px;background:#171208;margin-top:44px}
+.cta h2{color:#fff;font-size:24px;margin-bottom:10px}
+.cta p{color:#b9aa8c;font-size:14px;margin-bottom:22px}
+.big-dl{display:inline-block;background:#e0aa09;color:#241c08;font-weight:bold;padding:15px 46px;border-radius:14px;font-size:17px}
+footer{text-align:center;color:#7a6a52;font-size:13px;padding:26px 0 40px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Karel 机器人编程教学</h1>
+  <p>斯坦福大学用了几十年的第一门课 · wendust 内置 · 免费无需电脑</p>
+</div>
+
+<section class="container">
+  <h2 class="sec"><span class="bar"></span>Karel 是什么</h2>
+  <p class="body">Karel 是一台住在网格世界里的机器人。你用指令指挥它：前进、转弯、捡起或放下锥桶。程序写完点运行，机器人一步一步演给你看——写对写错，当场见分晓。</p>
+  <p class="body">它是斯坦福大学计算机系新生的第一门课，一用就是几十年。原因很简单：反馈直观，同时把编程真正的地基——<b>顺序、循环、条件、函数</b>——全部练到。这四件事，换任何一门语言都绕不开。</p>
+  <p class="body">wendust 里的 Karel 用 Python 风格缩进写法，程序会自动转译成 Lua 运行。学完 Karel，再看 Python 或 wendust 的 Lua 脚本，看到的将不是陌生符号，而是熟人。</p>
+
+  <h2 class="sec"><span class="bar"></span>三分钟上手</h2>
+  <div class="tip"><b>第一步</b>：新建项目 → 选择「Karel 机器人」模板。<br><b>第二步</b>：打开 karel.karel，里面有一段能直接跑的起步程序。<br><b>第三步</b>：点预览，看机器人捡起锥桶再送回起点。改几行指令再跑，就是学编程的全部节奏。</div>
+
+  <h2 class="sec"><span class="bar"></span>指令总表</h2>
+  <table>
+    <tr><th>类型</th><th>指令</th><th>作用</th></tr>
+    <tr><td>动作</td><td><code>move()</code></td><td>朝当前方向前进一格</td></tr>
+    <tr><td>动作</td><td><code>turn_left()</code></td><td>原地左转 90 度</td></tr>
+    <tr><td>动作</td><td><code>turn_right()</code></td><td>原地右转 90 度</td></tr>
+    <tr><td>动作</td><td><code>put_beeper()</code></td><td>从包里拿出一个锥桶放在脚下</td></tr>
+    <tr><td>动作</td><td><code>pick_beeper()</code></td><td>捡起脚下的一个锥桶</td></tr>
+    <tr><td>判断</td><td><code>front_is_clear()</code> / <code>front_is_blocked()</code></td><td>前方是否能走</td></tr>
+    <tr><td>判断</td><td><code>left_is_clear()</code> / <code>right_is_clear()</code></td><td>左方 / 右方是否能走</td></tr>
+    <tr><td>判断</td><td><code>beepers_present()</code></td><td>脚下是否有锥桶</td></tr>
+    <tr><td>判断</td><td><code>beepers_in_bag()</code></td><td>包里是否还有锥桶</td></tr>
+    <tr><td>判断</td><td><code>facing_north()</code> <code>facing_south()</code> <code>facing_east()</code> <code>facing_west()</code></td><td>是否朝某个方向</td></tr>
+  </table>
+  <p class="body">判断放在 <code>if</code> 或 <code>while</code> 里用，配合 <code>not</code> 取反，比如 <code>while not beepers_present():</code>。</p>
+
+  <h2 class="sec"><span class="bar"></span>世界声明（写在文件顶部）</h2>
+  <table>
+    <tr><th>声明</th><th>写法</th><th>说明</th></tr>
+    <tr><td>世界大小</td><td><code>world 宽 高</code></td><td>例如 <code>world 6 6</code>，最大 40。机器人出生在左下角，朝东</td></tr>
+    <tr><td>放锥桶</td><td><code>beeper x y 数量</code></td><td>在格子 (x, y) 放锥桶</td></tr>
+    <tr><td>砌墙</td><td><code>wall x1 y1 x2 y2</code></td><td>横向一段：这排格子的左侧都砌上墙；纵向一段：这列格子的上方都砌上墙</td></tr>
+    <tr><td>注释</td><td><code># 内容</code></td><td>井号后面是给人看的，机器人不执行</td></tr>
+  </table>
+  <p class="body">格子坐标从 (1, 1) 开始，x 是从左往右，y 是从下往上。撞墙不会穿过，程序会停在出错的那一步并提示原因。</p>
+
+  <h2 class="sec"><span class="bar"></span>起步程序逐行读</h2>
+<pre class="kc"><span class="c"># 一直前进，捡起路上的锥桶，再送回起点放下</span>
+world 6 6
+beeper 4 1 1
+
+<span class="k">def run</span>():
+    <span class="k">while not</span> beepers_present():
+        move()
+    pick_beeper()
+    turn_left()
+    turn_left()
+    <span class="k">for i in range</span>(3):
+        move()
+    put_beeper()</pre>
+  <p class="body"><code>def run():</code> 是入口，点运行后从这里开始执行。<code>while not beepers_present():</code> 意思是"脚下没锥桶就一直前进"——机器人在 (2,1)、(3,1) 各走一步，到 (4,1) 发现锥桶，循环停，捡起，掉头走三步回起点放下。共 10 步，一步不多。</p>
+
+  <h2 class="sec"><span class="bar"></span>八个练习，从易到难</h2>
+
+  <div class="ex"><h3>1. 正方形巡游</h3>
+<pre class="kc"><span class="k">def run</span>():
+    <span class="k">for i in range</span>(4):
+        move()
+        move()
+        move()
+        turn_left()</pre>
+    <p class="why">练：for 循环与转向。把"走三步转一次"重复四轮，机器人画出一个正方形回到原点。</p>
+  </div>
+
+  <div class="ex"><h3>2. 翻倍捡锥桶</h3>
+<pre class="kc">world 5 5
+beeper 3 3 2
+
+<span class="k">def run</span>():
+    move()
+    move()
+    <span class="k">while</span> beepers_present():
+        pick_beeper()</pre>
+    <p class="why">练：while 直接条件。脚上叠了两个锥桶，全捡进包。</p>
+  </div>
+
+  <div class="ex"><h3>3. 绕墙走廊</h3>
+<pre class="kc">world 6 3
+wall 3 1 3 1
+beeper 5 1 1
+
+<span class="k">def run</span>():
+    <span class="k">while not</span> beepers_present():
+        <span class="k">if</span> front_is_clear():
+            move()
+        <span class="k">else</span>:
+            turn_left()
+            move()
+            turn_right()</pre>
+    <p class="why">练：if/else 与绕障。正前方被墙挡住时，左移一格绕过去再回正。把 wall 改长一点，难度立刻上来。</p>
+  </div>
+
+  <div class="ex"><h3>4. 自定义函数：right_side()</h3>
+<pre class="kc"><span class="k">def turn_right</span>():
+    turn_left()
+    turn_left()
+    turn_left()
+
+<span class="k">def run</span>():
+    move()
+    turn_right()
+    move()</pre>
+    <p class="why">练：def 封装。语言只给左转，右转就自己造一个——这就是函数的意义：把常用动作打包起名字。</p>
+  </div>
+
+  <div class="ex"><h3>5. 沿墙爬行</h3>
+<pre class="kc">world 5 5
+wall 2 1 2 5
+
+<span class="k">def run</span>():
+    <span class="k">while</span> front_is_clear():
+        move()
+    <span class="k">while not</span> front_is_clear():
+        turn_left()
+    move()</pre>
+    <p class="why">练：多条件组合。向东走到墙根，原地左转到墙消失的方向再前进。把墙改成竖排，机器人会贴墙向上走。</p>
+  </div>
+
+  <div class="ex"><h3>6. 铺一条锥桶路</h3>
+<pre class="kc"><span class="k">def run</span>():
+    <span class="k">for i in range</span>(4):
+        put_beeper()
+        move()</pre>
+    <p class="why">练：边走边放。起步时给 <code>beeper 1 1 10</code> 让包里有货，机器人身后留下一条路。温故：pick 是捡，put 是放。</p>
+  </div>
+
+  <div class="ex"><h3>7. 清空整格再前进</h3>
+<pre class="kc">world 5 5
+beeper 2 1 3
+beeper 4 1 2
+
+<span class="k">def clean_here</span>():
+    <span class="k">while</span> beepers_present():
+        pick_beeper()
+
+<span class="k">def run</span>():
+    clean_here()
+    move()
+    clean_here()</pre>
+    <p class="why">练：函数复用。两个格子叠了不同数量的锥桶，同一个 clean_here() 清两处——写一次，到处用。</p>
+  </div>
+
+  <div class="ex"><h3>8. 综合任务：投递员</h3>
+<pre class="kc">world 6 6
+wall 4 2 4 6
+beeper 6 1 1
+
+<span class="k">def turn_right</span>():
+    turn_left()
+    turn_left()
+    turn_left()
+
+<span class="k">def run</span>():
+    <span class="k">while not</span> beepers_present():
+        <span class="k">if</span> front_is_clear():
+            move()
+        <span class="k">else</span>:
+            turn_right()
+            move()
+            turn_left()
+    pick_beeper()
+    turn_left()
+    <span class="k">while</span> front_is_clear():
+        move()
+    <span class="k">for i in range</span>(5):
+        move()
+    put_beeper()</pre>
+    <p class="why">练：全要素组合。沿东路前进，遇墙绕行，拿到锥桶后一路向北再向西送回角落。跑通它，你已经把顺序、循环、条件、函数全用了一遍。</p>
+  </div>
+
+  <h2 class="sec"><span class="bar"></span>常见报错</h2>
+  <section>
+  <div class="faq"><b>撞墙了（第 N 步）</b><p>机器人往墙或边界外走。对照提示的步数，数一数它在第几格。墙的位置用 wall 声明核对。</p></div>
+  <div class="faq"><b>缩进不对齐（第 N 行）</b><p>Karel 用缩进表示代码块，同一层语句必须左边空同样数量的空格。建议一层固定 4 格。</p></div>
+  <div class="faq"><b>elif/else 必须与 if 对齐</b><p>elif、else 要和它对应的 if 写在同一缩进位置。</p></div>
+  <div class="faq"><b>这里没有锥桶可捡 / 包里没有锥桶可放</b><p>捡之前先用 beepers_present() 确认脚下有货，放之前确认包里有。</p></div>
+  <div class="faq"><b>步数超过 10000，已强制停止</b><p>while 循环的条件永远成立，机器人卡住了。检查循环体里有没有让条件发生变化的语句（比如忘了 move）。wendust 会强制停止，防止手机卡死。</p></div>
+  <div class="faq"><b>Karel 转译失败</b><p>检查冒号是否漏了、括号是不是全角中文括号（要用英文括号）、指令名拼写是否正确。</p></div>
+  </section>
+
+  <h2 class="sec"><span class="bar"></span>它和真正的编程是什么关系</h2>
+  <p class="body">Karel 不是玩具语法，它教的是编程的地基：顺序、循环、条件、函数，任何编程语言都绕不开。斯坦福用它给计算机系新生上第一门课，几十年没换过——因为反馈足够直观：指令对不对，机器人当场走给你看。</p>
+  <p class="body">wendust 里的 Karel 用 Python 风格缩进语法，程序会先转译成 Lua 再由内置运行时执行。学完 Karel 再看 Python 或 wendust 的 Lua 交互脚本，看到的将不是陌生符号，而是熟人。</p>
+</section>
+
+<div class="cta">
+  <div class="container">
+    <h2>现在就指挥一个机器人</h2>
+    <p>wendust 内置 Karel 世界 · 免费 · 安卓 6.0 以上</p>
+    <a class="big-dl" href="https://wendust.surge.sh/downloads/wendust-v14.7.1.apk" download>免费下载 wendust</a>
+  </div>
+</div>
+
+<footer>wendust · Karel 机器人教学 · <a href="docs.html" style="color:#7a6a52">更多教学</a></footer>
+</body>
+</html>
