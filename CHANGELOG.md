@@ -1,5 +1,11 @@
 # wendust 更新日志
 
+## v14.7.1
+
+- **Karel 机器人编程语言**：新增教学编程语言 Karel——用 move、turn_left、pick_beeper 等指令指挥机器人在网格世界行动，边跑动画边学顺序/循环/条件/函数；新建项目模板新增「Karel 机器人」卡（开箱即跑起步程序）；世界声明（world/wall/beeper）+ 5 种动作 + 14 种判断 + if/elif/else/while/for/def 全套语法；Python 风格缩进，语法高亮内置；程序转译为 Lua 由 fengari 执行，与积木同构；带步数熔断保护（防死循环卡死）与转译错误行号提示
+- **详细教学**：官方 Karel 教学（指令表 + 8 个递进实例 + 常见错误）发布于 GitHub Pages docs/karel.html
+- 本体体积增量约 +15KB
+
 ## v14.7.0
 
 - **脚本语言 Lua 化**：网页项目逻辑语言从 JavaScript 全面切换为 Lua（fengari 运行时内置）——积木 55 种生成代码全部改为 Lua；新建脚本文件为 script.lua，自动挂载执行；教程第十一整章与 Canvas 练习配套改写；内置 Lua 语法高亮；wendust 原生能力桥在 Lua 中照常可用
